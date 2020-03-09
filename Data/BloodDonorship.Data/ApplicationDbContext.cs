@@ -30,6 +30,10 @@ namespace BloodDonorship.Data
 
         public DbSet<Request> Requests { get; set; }
 
+        public DbSet<Donation> Donations { get; set; }
+
+        public DbSet<Notification> Notifications { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

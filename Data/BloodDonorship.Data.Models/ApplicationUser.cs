@@ -18,6 +18,9 @@ namespace BloodDonorship.Data.Models
             this.Logins = new HashSet<IdentityUserLogin<string>>();
 
             this.Requests = new HashSet<Request>();
+            this.Donations = new HashSet<Donation>();
+            this.Senders = new HashSet<Notification>();
+            this.Recipients = new HashSet<Notification>();
         }
 
         // Audit info
