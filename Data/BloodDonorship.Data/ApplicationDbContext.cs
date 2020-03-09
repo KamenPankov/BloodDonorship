@@ -28,6 +28,8 @@ namespace BloodDonorship.Data
 
         public DbSet<Blood> Bloods { get; set; }
 
+        public DbSet<Request> Requests { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

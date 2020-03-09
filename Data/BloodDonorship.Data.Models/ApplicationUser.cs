@@ -1,7 +1,7 @@
 ﻿// ReSharper disable VirtualMemberCallInConstructor
 using System;
 using System.Collections.Generic;
-
+using System.ComponentModel.DataAnnotations.Schema;
 using BloodDonorship.Data.Common.Models;
 
 using Microsoft.AspNetCore.Identity;
@@ -16,6 +16,8 @@ namespace BloodDonorship.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+
+            this.Requests = new HashSet<Request>();
         }
 
         // Audit info
@@ -28,7 +30,7 @@ namespace BloodDonorship.Data.Models
 
         public DateTime? DeletedOn { get; set; }
 
-        public int BloodId { get; set; }
+        public int? BloodId { get; set; }
 
         public Blood Blood { get; set; }
 
@@ -37,5 +39,15 @@ namespace BloodDonorship.Data.Models
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        public virtual ICollection<Request> Requests { get; set; }
+
+        public virtual ICollection<Donation> Donations { get; set; }
+
+        [InverseProperty("Sender")]
+        public virtual ICollection<Notification> Senders { get; set; }
+
+        [InverseProperty("Recipient")]
+        public virtual ICollection<Notification> Recipients { get; set; }
     }
 }
