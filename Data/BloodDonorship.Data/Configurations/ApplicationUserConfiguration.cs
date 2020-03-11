@@ -1,9 +1,9 @@
-﻿namespace BloodDonorship.Data.Configurations
-{
-    using BloodDonorship.Data.Models;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using BloodDonorship.Data.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+namespace BloodDonorship.Data.Configurations
+{
     public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> appUser)
@@ -27,6 +27,12 @@
                 .WithOne()
                 .HasForeignKey(e => e.UserId)
                 .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            appUser
+                .HasOne(u => u.Blood)
+                .WithMany(b => b.Users)
+                .HasForeignKey(u => u.BloodId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

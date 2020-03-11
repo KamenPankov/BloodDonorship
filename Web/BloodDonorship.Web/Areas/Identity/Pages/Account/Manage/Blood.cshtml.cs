@@ -36,6 +36,9 @@ namespace BloodDonorship.Web.Areas.Identity.Pages.Account.Manage
 
         public IEnumerable<SelectListItem> RhFactors { get; set; }
 
+        [TempData]
+        public string SuccessMessage { get; set; }
+
         public async Task LoadAsync(ApplicationUser user)
         {
             if (user?.BloodId > 0)
@@ -59,7 +62,7 @@ namespace BloodDonorship.Web.Areas.Identity.Pages.Account.Manage
 
             if (user == null)
             {
-                return this.NotFound($"Unable to load user with ID '{this.userManager.GetUserId(this.User)}'.");                
+                return this.NotFound($"Unable to load user with ID '{this.userManager.GetUserId(this.User)}'.");
             }
 
             await this.LoadAsync(user);
@@ -75,16 +78,23 @@ namespace BloodDonorship.Web.Areas.Identity.Pages.Account.Manage
             {
                 user.Blood = this.bloodsService.GetBlood(this.BloodType, this.RhFactor);
 
-                await this.userManager.UpdateAsync(user);
+                if (user.Blood == null)
+                {
+                    this.ModelState.AddModelError("Error", $"Unable to find blood type {this.BloodType} and rh factor {this.RhFactor}");
+                }
+                else
+                {
+                    await this.userManager.UpdateAsync(user);
 
-                await this.LoadAsync(user);
+                    this.SuccessMessage = "Blood type has been updated successfully.";
+                }
             }
             else
             {
                 this.ModelState.AddModelError("Error", "Select blood type and rh factor.");
-
-                await this.LoadAsync(user);
             }
+
+            await this.LoadAsync(user);
 
             return this.Page();
         }
