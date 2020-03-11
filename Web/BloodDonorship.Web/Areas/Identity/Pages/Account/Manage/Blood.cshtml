@@ -1,0 +1,42 @@
+﻿@page
+@model BloodModel
+
+@{
+    ViewData["Title"] = "Manage Blood Type";
+    ViewData["ActivePage"] = ManageNavPages.Blood;
+}
+
+<h4>@ViewData["Title"]</h4>
+
+<div class="row">
+    <div class="col-md-6">
+        <form id="blood-form" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BloodType"></label>
+                <select asp-for="BloodType" name="BloodType" class="form-control" asp-items="Model.BloodTypes" >
+                    <option value="" selected>@Model.BloodType</option>
+                </select>
+                <span asp-validation-for="BloodType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RhFactor"></label>
+                <select asp-for="RhFactor" name="RhFactor" class="form-control" asp-items="Model.RhFactors">
+                    <option value="" selected>@Model.RhFactor</option>
+                </select>
+                <span asp-validation-for="RhFactor" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Select Blood Type</button>
+            @if (Model.ModelState.ErrorCount > 0)
+            {
+                <div class="alert alert-danger"><strong>Error! </strong>@Model.ModelState["Error"].Errors.First().ErrorMessage
+                    
+                </div>
+            }
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
