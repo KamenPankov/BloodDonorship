@@ -34,6 +34,18 @@ namespace BloodDonorship.Data.Configurations
                 .WithMany(b => b.Users)
                 .HasForeignKey(u => u.BloodId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            appUser
+                .HasMany(u => u.Requests)
+                .WithOne(r => r.User)
+                .HasForeignKey(r => r.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            appUser
+                .HasMany(u => u.Donations)
+                .WithOne(d => d.User)
+                .HasForeignKey(r => r.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

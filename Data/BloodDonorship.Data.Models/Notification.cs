@@ -16,15 +16,15 @@ namespace BloodDonorship.Data.Models
 
         public string SenderId { get; set; }
 
-        public ApplicationUser Sender { get; set; }
+        public virtual ApplicationUser Sender { get; set; }
 
         public string RecipientId { get; set; }
 
-        public ApplicationUser Recipient { get; set; }
+        public virtual ApplicationUser Recipient { get; set; }
 
         public string RequestId { get; set; }
 
-        public Request Request { get; set; }
+        public virtual Request Request { get; set; }
 
         [MaxLength(1000)]
         public string Content { get; set; }

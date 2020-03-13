@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+
 using BloodDonorship.Data.Common.Models;
 
 using Microsoft.AspNetCore.Identity;
@@ -35,7 +36,7 @@ namespace BloodDonorship.Data.Models
 
         public int? BloodId { get; set; }
 
-        public Blood Blood { get; set; }
+        public virtual Blood Blood { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 

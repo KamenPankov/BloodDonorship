@@ -8,6 +8,7 @@ using BloodDonorship.Data.Repositories;
 using BloodDonorship.Data.Seeding;
 using BloodDonorship.Services.Data;
 using BloodDonorship.Services.Data.BloodsService;
+using BloodDonorship.Services.Data.RequestsService;
 using BloodDonorship.Services.Mapping;
 using BloodDonorship.Services.Messaging;
 using BloodDonorship.Web.ViewModels;
@@ -61,6 +62,7 @@ namespace BloodDonorship.Web
             services.AddTransient<IEmailSender>(x => new SendGridEmailSender(this.configuration.GetValue<string>("SendGridApiKey")));
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IBloodsService, BloodsService>();
+            services.AddTransient<IRequestsService, RequestsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -104,7 +106,9 @@ namespace BloodDonorship.Web
             app.UseEndpoints(
                 endpoints =>
                     {
-                        endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");                        
+                        endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute("bloodRequests", "Requests/All", new { controller = "Requests", action = "All" });
+                        endpoints.MapControllerRoute("bloodRequest", "Requests/Create", new { controller = "Requests", action = "Create" });
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });

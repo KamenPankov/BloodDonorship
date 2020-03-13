@@ -1,9 +1,40 @@
-﻿@using BloodDonorship.Common
+﻿@using  Microsoft.AspNetCore.Identity
+@using  BloodDonorship.Data.Models
+@using  BloodDonorship.Web.ViewModels.Home
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SigninManager
+
+@model IndexViewModel
+
+@using BloodDonorship.Common
 @{
     this.ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@if (SigninManager.IsSignedIn(this.User))
+{
+    <div class="row">
+        @foreach (AllRequestViewModel request in Model.AllRequests)
+        {
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Request from: @request.UserName</h5>
+                        <p class="card-text">Blood Type: @request.BloodType</p>
+                        <p class="card-text">Issued on: @request.CreatedOn</p>
+                        <a href="#" class="btn btn-primary">Donate</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+   <h1>Hello, from Index!</h1>
+}
+else
+{
+    <div class="text-center">
+        <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
+}
+
