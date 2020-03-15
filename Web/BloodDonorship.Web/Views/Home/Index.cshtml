@@ -20,7 +20,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Request from: @request.UserName</h5>
-                        <p class="card-text">Blood Type: @request.BloodType</p>
+                        <p class="card-text">Blood Type: @string.Concat(request.UserBloodBloodType, " ", request.UserBloodRhFactor)</p>
                         <p class="card-text">Issued on: @request.CreatedOn</p>
                         <a href="#" class="btn btn-primary">Donate</a>
                     </div>
@@ -28,7 +28,7 @@
             </div>
         }
     </div>
-   <h1>Hello, from Index!</h1>
+   
 }
 else
 {

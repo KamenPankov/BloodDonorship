@@ -19,7 +19,7 @@ namespace BloodDonorship.Services.Data.BloodsService
 
         public Blood GetBlood(string bloodType, string rhFactor)
         {
-            return this.bloodRepository.All().AsEnumerable()
+            return this.bloodRepository.All().AsEnumerable<Blood>()
                 .Where(b => b.BloodType.ToString() == bloodType && b.RhFactor.ToString() == rhFactor)
                 .FirstOrDefault();
         }
@@ -63,7 +63,7 @@ namespace BloodDonorship.Services.Data.BloodsService
 
         public string GetBloodType(int bloodId)
         {
-            return this.bloodRepository.All().AsEnumerable()
+            return this.bloodRepository.All().AsEnumerable<Blood>()
                 .Where(b => b.Id == bloodId)
                 .Select(b => b.BloodType.ToString())
                 .FirstOrDefault();
@@ -71,7 +71,7 @@ namespace BloodDonorship.Services.Data.BloodsService
 
         public string GetRhFactor(int bloodId)
         {
-            return this.bloodRepository.All().AsEnumerable()
+            return this.bloodRepository.All().AsEnumerable<Blood>()
                 .Where(b => b.Id == bloodId)
                 .Select(b => b.RhFactor.ToString())
                 .FirstOrDefault();
