@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoMapper;
+﻿using AutoMapper;
 using BloodDonorship.Data.Models;
 using BloodDonorship.Services.Mapping;
 
@@ -11,7 +8,7 @@ namespace BloodDonorship.Web.ViewModels.Home
     {
         public string Id { get; set; }
 
-        public string UserName { get; set; }
+        public string UserUserName { get; set; }
 
         public string UserBloodBloodType { get; set; }
 
@@ -30,7 +27,10 @@ namespace BloodDonorship.Web.ViewModels.Home
                 s.User.Blood.RhFactor.ToString()));
 
             configuration.CreateMap<BloodDonorship.Data.Models.Request, AllRequestViewModel>()
-                .ForMember(d => d.UserName, o => o.MapFrom(s => s.User.UserName));
+                .ForMember(d => d.UserUserName, o => o.MapFrom(s => s.User.UserName));
+
+            configuration.CreateMap<BloodDonorship.Data.Models.Request, AllRequestViewModel>()
+                .ForMember(c => c.CreatedOn, o => o.MapFrom(s => s.CreatedOn.ToString("dd-MMM-yyyy hh:mm")));
         }
     }
 

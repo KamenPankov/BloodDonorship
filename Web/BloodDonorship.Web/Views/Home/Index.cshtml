@@ -13,15 +13,17 @@
 
 @if (SigninManager.IsSignedIn(this.User))
 {
+    <h1>All Requests</h1>
+    <hr />
     <div class="row">
         @foreach (AllRequestViewModel request in Model.AllRequests)
         {
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Request from: @request.UserName</h5>
+                        <h5 class="card-title">Request from: @request.UserUserName</h5>
                         <p class="card-text">Blood Type: @string.Concat(request.UserBloodBloodType, " ", request.UserBloodRhFactor)</p>
-                        <p class="card-text">Issued on: @request.CreatedOn</p>
+                        <p class="card-text">Created on: @request.CreatedOn</p>
                         <a href="#" class="btn btn-primary">Donate</a>
                     </div>
                 </div>
