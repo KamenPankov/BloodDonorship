@@ -41,6 +41,12 @@ namespace BloodDonorship.Web
 
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddAuthentication()
+                .AddFacebook(facebookOptions =>
+                {
+                    facebookOptions.AppId = this.configuration["FacebookLoggin:AppId"];
+                    facebookOptions.AppSecret = this.configuration["FacebookLoggin:AppSecret"];
+                });
 
             services.Configure<CookiePolicyOptions>(
                 options =>
@@ -52,7 +58,7 @@ namespace BloodDonorship.Web
             services.AddControllersWithViews(configure =>
                 configure.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
 
-            services.AddRazorPages();            
+            services.AddRazorPages();
 
             services.AddSingleton(this.configuration);
 

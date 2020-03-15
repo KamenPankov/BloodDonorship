@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using BloodDonorship.Data.Models;
 using BloodDonorship.Services.Data.RequestsService;
 using BloodDonorship.Web.ViewModels.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BloodDonorship.Web.Controllers
 {
+    [Authorize]
     public class RequestsController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
