@@ -1,7 +1,4 @@
-﻿using BloodDonorship.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BloodDonorship.Services.Data.RequestsService

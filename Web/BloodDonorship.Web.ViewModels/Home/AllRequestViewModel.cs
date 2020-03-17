@@ -8,6 +8,8 @@ namespace BloodDonorship.Web.ViewModels.Home
     {
         public string Id { get; set; }
 
+        public string UserId { get; set; }
+
         public string UserUserName { get; set; }
 
         public string UserBloodBloodType { get; set; }
@@ -15,6 +17,8 @@ namespace BloodDonorship.Web.ViewModels.Home
         public string UserBloodRhFactor { get; set; }
 
         public string CreatedOn { get; set; }
+
+        public int DonationsCount { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
