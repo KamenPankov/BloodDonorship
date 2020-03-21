@@ -1,10 +1,12 @@
 ﻿
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
 using BloodDonorship.Data.Models;
 using BloodDonorship.Services.Data.DonationsService;
+using BloodDonorship.Services.Data.RequestsService;
 using BloodDonorship.Web.ViewModels.Donations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -16,13 +18,16 @@ namespace BloodDonorship.Web.Controllers
     public class DonationsController : Controller
     {
         private readonly IDonationsService donationsService;
+        private readonly IRequestsService requestsService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public DonationsController(
             IDonationsService donationsService,
+            IRequestsService requestsService,
             UserManager<ApplicationUser> userManager)
         {
             this.donationsService = donationsService;
+            this.requestsService = requestsService;
             this.userManager = userManager;
         }
 
@@ -68,7 +73,15 @@ namespace BloodDonorship.Web.Controllers
                 return this.View(viewModel);
             }
 
+            string fileName = "Verification_Document";
+            string fileExtension = Path.GetExtension(viewModel.FormFile.FileName).ToLower();
+
+            viewModel.FileName = string.Concat(fileName, fileExtension);
+
             await this.donationsService.AddAsync(viewModel);
+
+            this.TempData["Success"] = 
+                $"Successfully donated to {await this.userManager.FindByIdAsync(this.requestsService.GetUserId(viewModel.RequestId))}!";
 
             return this.RedirectToAction("Index", "Home");
         }

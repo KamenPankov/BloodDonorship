@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using BloodDonorship.Data.Common.Repositories;
 using BloodDonorship.Data.Models;
+using BloodDonorship.Services.Mapping;
 using BloodDonorship.Web.ViewModels.Donations;
 
 namespace BloodDonorship.Services.Data.DonationsService
@@ -27,12 +29,40 @@ namespace BloodDonorship.Services.Data.DonationsService
                 {
                     RequestId = viewModel.RequestId,
                     UserId = viewModel.UserId,
+                    ImageTitle = viewModel.FileName,
                     ImageData = memorySream.ToArray(),
                 };
 
                 await this.entityRepository.AddAsync(donation);
                 await this.entityRepository.SaveChangesAsync();
             }
+        }
+
+        public byte[] FileContent(string id)
+        {
+            return this.entityRepository.All()
+                .Where(d => d.Id == id)
+                .Select(d => d.ImageData)
+                .FirstOrDefault();
+        }
+
+        public string FileType(string id)
+        {
+            string fileName = this.entityRepository.All()
+                .Where(d => d.Id == id)
+                .Select(d => d.ImageTitle)
+                .FirstOrDefault();
+
+            return Path.GetExtension(fileName);
+        }
+
+        public IEnumerable<T> GetDonationsPerRequest<T>(string requestId)
+        {
+            return this.entityRepository.All()
+                .Where(d => d.RequestId == requestId)
+                .OrderByDescending(d => d.CreatedOn)
+                .To<T>()
+                .ToArray();
         }
 
         public DateTime LastDonationDate(string userId)

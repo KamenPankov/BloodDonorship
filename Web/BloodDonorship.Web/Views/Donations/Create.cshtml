@@ -28,7 +28,7 @@
                 <input asp-for="RequestId" class="form-control" />
                 <span asp-validation-for="RequestId" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" hidden>
                 <label asp-for="UserId" class="control-label"></label>
                 <input type="text" name="UserId" value="@UserManager.GetUserId(this.User)" class="form-control"/>
                 <span asp-validation-for="UserId" class="text-danger"></span>

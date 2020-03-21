@@ -52,5 +52,13 @@ namespace BloodDonorship.Services.Data.RequestsService
 
             return query.To<T>().ToArray();
         }
+
+        public string GetUserId(string requestId)
+        {
+            return this.requestsRepository.All()
+                .Where(r => r.Id == requestId)
+                .Select(r => r.UserId)
+                .FirstOrDefault();
+        }
     }
 }

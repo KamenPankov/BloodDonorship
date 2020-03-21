@@ -1,0 +1,35 @@
+﻿@model IEnumerable<BloodDonorship.Web.ViewModels.Requests.DonationInDetailsRequestViewModel>
+
+@{
+    ViewData["Title"] = "Donations";
+}
+
+<h1>@this.ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="All" class="btn btn-outline-primary">Back to My Requests</a>
+</p>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>            
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var donation in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => donation.ImageTitle)
+            </td>
+            <td>
+                <a href="Download?donationId=@donation.Id" class="btn btn-primary text-white">Download</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

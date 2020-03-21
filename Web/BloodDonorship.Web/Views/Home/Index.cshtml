@@ -17,9 +17,17 @@
     <hr />
     @if (this.TempData["Message"] != null)
     {
-        <div class="alert alert-danger alert-dismissible ">
-            <strong>@this.TempData["Message"]</strong>
-        </div>
+    <div class="alert alert-danger alert-dismissible ">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>@this.TempData["Message"]</strong>
+    </div>
+    }
+    else if (this.TempData["Success"] != null)
+    {
+    <div class="alert alert-success alert-dismissible ">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>@this.TempData["Success"]</strong>
+    </div>
     }
     <div class="row">
         @foreach (AllRequestViewModel request in Model.AllRequests)
@@ -37,7 +45,7 @@
             </div>
         }
     </div>
-   
+
 }
 else
 {

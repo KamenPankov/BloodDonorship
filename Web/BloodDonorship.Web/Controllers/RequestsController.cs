@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using BloodDonorship.Data.Models;
+using BloodDonorship.Services.Data.DonationsService;
 using BloodDonorship.Services.Data.RequestsService;
 using BloodDonorship.Web.ViewModels.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
 
 namespace BloodDonorship.Web.Controllers
 {
@@ -18,15 +20,18 @@ namespace BloodDonorship.Web.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IRequestsService requestsService;
+        private readonly IDonationsService donationsService;
 
         public RequestsController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IRequestsService requestsService)
+            IRequestsService requestsService,
+            IDonationsService donationsService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.requestsService = requestsService;
+            this.donationsService = donationsService;
         }
 
         [HttpGet]
@@ -58,6 +63,37 @@ namespace BloodDonorship.Web.Controllers
             await this.requestsService.Add(user.Id);
 
             return this.RedirectToAction("All");
+        }
+
+        [HttpGet]
+        public IActionResult Details(string requestId)
+        {
+            DetailsRequestViewModel viewModel = new DetailsRequestViewModel()
+            {
+                Id = requestId,
+                Donations = this.donationsService
+                .GetDonationsPerRequest<DonationInDetailsRequestViewModel>(requestId),
+            };
+
+            return this.View(viewModel.Donations);
+        }
+
+        [HttpGet]
+        public FileResult Download(string donationId)
+        {
+            byte[] fileContent = this.donationsService.FileContent(donationId);
+            new FileExtensionContentTypeProvider()
+                .TryGetContentType(this.donationsService.FileType(donationId), out string mimeType);
+
+            return this.File(fileContent, mimeType);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(string requestId)
+        {
+            this.TempData["Delete"] = "You are about to delete the request. It will no longer be seen by potential donors!";
+
+            return this.View();
         }
     }
 }

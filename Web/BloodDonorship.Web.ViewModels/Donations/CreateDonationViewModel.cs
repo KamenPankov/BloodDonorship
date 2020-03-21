@@ -15,6 +15,8 @@ namespace BloodDonorship.Web.ViewModels.Donations
         [Required]
         public string UserId { get; set; }
 
+        public string FileName { get; set; }
+
         [Required(ErrorMessage = "No file is chosen. Please choose a file!")]
         [Display(Name = "Verification Document")]
         public IFormFile FormFile { get; set; }

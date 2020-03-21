@@ -10,5 +10,7 @@ namespace BloodDonorship.Services.Data.RequestsService
         IEnumerable<T> AllByUser<T>(string userId, int? count = null);
 
         Task Add(string userId);
+
+        string GetUserId(string requestId); // Requesrer
     }
 }

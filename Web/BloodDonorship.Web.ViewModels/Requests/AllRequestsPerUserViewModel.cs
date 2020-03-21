@@ -1,12 +1,15 @@
-﻿using AutoMapper;
+﻿using System.ComponentModel.DataAnnotations;
+
+using AutoMapper;
 using BloodDonorship.Data.Models;
 using BloodDonorship.Services.Mapping;
-using System.ComponentModel.DataAnnotations;
 
 namespace BloodDonorship.Web.ViewModels.Requests
 {
     public class AllRequestsPerUserViewModel : IMapFrom<Request>, IHaveCustomMappings
     {
+        public string Id { get; set; }
+
         [Display(Name = "Created On")]
         public string CreatedOn { get; set; }
 

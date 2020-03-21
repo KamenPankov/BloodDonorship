@@ -13,5 +13,11 @@ namespace BloodDonorship.Services.Data.DonationsService
         Task AddAsync(CreateDonationViewModel viewModel);
 
         DateTime LastDonationDate(string userId); // donor
+
+        IEnumerable<T> GetDonationsPerRequest<T>(string requestId);
+
+        byte[] FileContent(string id);
+
+        string FileType(string id);
     }
 }

@@ -1,14 +1,16 @@
-﻿@model IEnumerable<BloodDonorship.Web.ViewModels.Requests.AllRequestsPerUserViewModel>
+﻿@using BloodDonorship.Web.ViewModels.Requests
+@model IEnumerable<BloodDonorship.Web.ViewModels.Requests.AllRequestsPerUserViewModel>
 
 @{
-    ViewData["Title"] = "All";
+    ViewData["Title"] = "My Requests";
 }
 
-<h1>My Requests</h1>
+<h1>@ViewData["Title"]</h1>
 <hr />
 
 <p>
-    <a class="btn btn-primary" asp-controller="Requests" asp-action="Create" >Create New</a>
+    <a class="btn btn-primary" asp-controller="Requests" asp-action="Create">Create New</a>
+    <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Index">Back to All</a>
 </p>
 <table class="table">
     <thead>
@@ -20,15 +22,14 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (AllRequestsPerUserViewModel request in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedOn)
+                @Html.DisplayFor(modelItem => request.CreatedOn)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            <td>               
+                <a href="Details?requestId=@request.Id" class="btn btn-success text-white">Donations</a>
+                <a href="Delete?requestId=@request.Id" class="btn btn-danger text-white">Delete</a>
             </td>
         </tr>
 }
