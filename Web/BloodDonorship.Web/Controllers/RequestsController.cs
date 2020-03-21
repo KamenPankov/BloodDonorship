@@ -44,7 +44,7 @@ namespace BloodDonorship.Web.Controllers
                 return this.RedirectToAction("Index", "Home");
             }
 
-            IEnumerable<AllRequestsPerUserViewModel> requests = 
+            IEnumerable<AllRequestsPerUserViewModel> requests =
                 this.requestsService.AllByUser<AllRequestsPerUserViewModel>(user.Id);
 
             return this.View(requests);
@@ -91,9 +91,22 @@ namespace BloodDonorship.Web.Controllers
         [HttpGet]
         public IActionResult Delete(string requestId)
         {
-            this.TempData["Delete"] = "You are about to delete the request. It will no longer be seen by potential donors!";
+            this.TempData["DeleteMessage"] = "You are about to delete the request. It will no longer be seen by potential donors!";
 
-            return this.View();
+            DeleteRequestViewModel viewModel = new DeleteRequestViewModel()
+            {
+                Id = requestId,
+            };
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(DeleteRequestViewModel viewModel)
+        {
+            await this.requestsService.Delete(viewModel.Id);
+
+            return this.RedirectToAction("All");
         }
     }
 }

@@ -12,5 +12,7 @@ namespace BloodDonorship.Services.Data.RequestsService
         Task Add(string userId);
 
         string GetUserId(string requestId); // Requesrer
+
+        Task Delete(string id);
     }
 }

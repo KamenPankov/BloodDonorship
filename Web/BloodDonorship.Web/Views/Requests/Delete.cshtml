@@ -1,7 +1,25 @@
-﻿
+﻿@model BloodDonorship.Web.ViewModels.Requests.DeleteRequestViewModel
 @{
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+@if (this.TempData["DeleteMessage"] != null)
+{
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+    <div class="form-group">
+        <div class="alert alert-danger">
+            <strong>@this.TempData["DeleteMessage"]</strong>
+        </div>
+
+        <div>
+            <a asp-controller="Requests" asp-action="All" class="btn btn-outline-primary">Cancel</a>
+            <input type="submit" value="Delete" class="btn btn-danger text-white" />
+        </div>
+    </div>
+</form>
+    
+}
 

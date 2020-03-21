@@ -53,6 +53,20 @@ namespace BloodDonorship.Services.Data.RequestsService
             return query.To<T>().ToArray();
         }
 
+        public async Task Delete(string id)
+        {
+            Request request = this.requestsRepository.All()
+                .FirstOrDefault(r => r.Id == id);
+
+            if (request != null)
+            {
+                this.requestsRepository.Delete(request);
+                await this.requestsRepository.SaveChangesAsync();
+            }
+
+           
+        }
+
         public string GetUserId(string requestId)
         {
             return this.requestsRepository.All()
