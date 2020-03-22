@@ -1,10 +1,12 @@
-﻿using BloodDonorship.Web.ViewModels.Users;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
+using BloodDonorship.Data.Models;
+using BloodDonorship.Web.ViewModels.Users;
 
 namespace BloodDonorship.Services.Data.UsersService
 {
     public interface IUsersService
     {
-        IEnumerable<EligibleUserViewModel> GetEligibleDonors(string userId);
+        IEnumerable<EligibleUserViewModel> GetEligibleDonors(ApplicationUser user);
     }
 }

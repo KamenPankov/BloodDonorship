@@ -71,11 +71,13 @@ namespace BloodDonorship.Web.Controllers
 
             await this.requestsService.Add(user.Id);
 
-            // TODO: get eligible users and notify them
             IEnumerable<EligibleUserViewModel> eligibleUsers =
-                this.usersService.GetEligibleDonors(user.Id);
+                this.usersService.GetEligibleDonors(user);
 
             await this.NotifyEligibleDonorsAsync(eligibleUsers, user);
+
+            this.TempData["NotifiedDonors"] = eligibleUsers.Any() ?
+                $"{eligibleUsers.Count()} potential donors have been notified!" : string.Empty;
 
             return this.RedirectToAction("All");
         }

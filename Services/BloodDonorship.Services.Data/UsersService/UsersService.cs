@@ -1,13 +1,11 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using BloodDonorship.Data.Common.Repositories;
 using BloodDonorship.Data.Models;
 using BloodDonorship.Data.Models.Enums;
-using BloodDonorship.Services.Mapping;
 using BloodDonorship.Web.ViewModels.Users;
-using Microsoft.EntityFrameworkCore;
 
 namespace BloodDonorship.Services.Data.UsersService
 {
@@ -20,11 +18,14 @@ namespace BloodDonorship.Services.Data.UsersService
             this.entityRepository = entityRepository;
         }
 
-        public IEnumerable<EligibleUserViewModel> GetEligibleDonors(string userId)
+        public IEnumerable<EligibleUserViewModel> GetEligibleDonors(ApplicationUser user)
         {
+            IEnumerable<(string BloodGroup, string RhFactor)> eligibleBloodTypes =
+                this.CompatableBloodTypes(user.Blood.BloodType, user.Blood.RhFactor);
+
             IEnumerable<ApplicationUser> query = this.entityRepository.All().AsEnumerable()
-                .Where(u => u.Id != userId &&
-                this.CompatableBloodTypes(u.Blood.BloodType, u.Blood.RhFactor)
+                .Where(u => u.Id != user.Id &&
+                eligibleBloodTypes
                 .Any(b => (b.BloodGroup == u.Blood.BloodType.ToString() && b.RhFactor == u.Blood.RhFactor.ToString())) &&
                 (DateTime.UtcNow - u.Donations
                     .OrderByDescending(d => d.CreatedOn)
@@ -95,8 +96,8 @@ namespace BloodDonorship.Services.Data.UsersService
                         ("O", "Negative"),
                     },
                 };
-
-            return compatableBloods[(bloodType.ToString(), rhFactor.ToString())];
+            List<(string, string)> resultBloods = compatableBloods[(bloodType.ToString(), rhFactor.ToString())];
+            return resultBloods;
         }
     }
 }
