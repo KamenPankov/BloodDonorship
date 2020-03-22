@@ -17,11 +17,12 @@ namespace BloodDonorship.Services.Data.RequestsService
             this.requestsRepository = requestsRepository;
         }
 
-        public async Task Add(string userId)
+        public async Task Add(string userId, int notifiedUsersCount)
         {
             await this.requestsRepository.AddAsync(new Request()
             {
                 UserId = userId,
+                NotifiedUsersCount = notifiedUsersCount,
             });
 
             await this.requestsRepository.SaveChangesAsync();

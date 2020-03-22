@@ -18,7 +18,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.CreatedOn)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.NotifiedUsersCount)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -29,9 +31,9 @@
                 @Html.DisplayFor(modelItem => request.CreatedOn)
             </td>
             <td>
-                @if (this.TempData["NotifiedDonors"] != null)
+                @if (request.NotifiedUsersCount > 0)
                 {
-                <span>@this.TempData["NotifiedDonors"]</span> 
+                <span>@($"{request.NotifiedUsersCount} potential donors have been notified.")</span> 
                 }
             </td>
             <td>               

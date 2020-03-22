@@ -13,6 +13,9 @@ namespace BloodDonorship.Web.ViewModels.Requests
         [Display(Name = "Created On")]
         public string CreatedOn { get; set; }
 
+        [Display(Name = "Notified People")]
+        public int NotifiedUsersCount { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<BloodDonorship.Data.Models.Request, AllRequestsPerUserViewModel>()

@@ -15,6 +15,8 @@ namespace BloodDonorship.Data.Models
             this.Donations = new HashSet<Donation>();
         }
 
+        public int NotifiedUsersCount { get; set; }
+
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; } // Requester
