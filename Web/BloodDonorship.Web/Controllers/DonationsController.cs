@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -85,6 +84,5 @@ namespace BloodDonorship.Web.Controllers
 
             return this.RedirectToAction("Index", "Home");
         }
-
     }
 }

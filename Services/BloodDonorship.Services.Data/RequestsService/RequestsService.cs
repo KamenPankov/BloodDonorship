@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 using BloodDonorship.Data.Common.Repositories;
 using BloodDonorship.Data.Models;
 using BloodDonorship.Services.Mapping;
@@ -63,8 +64,6 @@ namespace BloodDonorship.Services.Data.RequestsService
                 this.requestsRepository.Delete(request);
                 await this.requestsRepository.SaveChangesAsync();
             }
-
-           
         }
 
         public string GetUserId(string requestId)
