@@ -86,20 +86,10 @@ namespace BloodDonorship.Web.Controllers
             {
                 Id = requestId,
                 Donations = this.donationsService
-                .GetDonationsPerRequest<DonationInDetailsRequestViewModel>(requestId),
+                .AllByRequest<DonationInDetailsRequestViewModel>(requestId),
             };
 
             return this.View(viewModel.Donations);
-        }
-
-        [HttpGet]
-        public FileResult Download(string donationId)
-        {
-            byte[] fileContent = this.donationsService.FileContent(donationId);
-            new FileExtensionContentTypeProvider()
-                .TryGetContentType(this.donationsService.FileType(donationId), out string mimeType);
-
-            return this.File(fileContent, mimeType);
         }
 
         [HttpGet]
@@ -128,7 +118,7 @@ namespace BloodDonorship.Web.Controllers
             string from = await this.userManager.GetEmailAsync(user);
             string fromName = await this.userManager.GetUserNameAsync(user);
             string subject = $"Blood Request from {fromName}";
-            string content = $"{fromName} has made a blood request. You can help him!";
+            string content = $"{fromName} has made a blood request. You can make a donation for him.";
 
             foreach (EligibleUserViewModel donor in eligibleUsers)
             {

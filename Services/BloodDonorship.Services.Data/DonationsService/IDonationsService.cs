@@ -14,10 +14,14 @@ namespace BloodDonorship.Services.Data.DonationsService
 
         DateTime LastDonationDate(string userId); // donor
 
-        IEnumerable<T> GetDonationsPerRequest<T>(string requestId);
+        IEnumerable<T> AllByRequest<T>(string requestId);
+
+        IEnumerable<T> AllByUser<T>(string userId);
 
         byte[] FileContent(string id);
 
         string FileType(string id);
+
+        Task Delete(string donationId);
     }
 }

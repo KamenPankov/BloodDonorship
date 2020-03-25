@@ -56,10 +56,19 @@ namespace BloodDonorship.Services.Data.DonationsService
             return Path.GetExtension(fileName);
         }
 
-        public IEnumerable<T> GetDonationsPerRequest<T>(string requestId)
+        public IEnumerable<T> AllByRequest<T>(string requestId)
         {
             return this.entityRepository.All()
                 .Where(d => d.RequestId == requestId)
+                .OrderByDescending(d => d.CreatedOn)
+                .To<T>()
+                .ToArray();
+        }
+
+        public IEnumerable<T> AllByUser<T>(string userId)
+        {
+            return this.entityRepository.All()
+                .Where(d => d.UserId == userId)
                 .OrderByDescending(d => d.CreatedOn)
                 .To<T>()
                 .ToArray();
@@ -72,6 +81,14 @@ namespace BloodDonorship.Services.Data.DonationsService
                         .Select(d => d.CreatedOn)
                         .OrderByDescending(d => d)
                         .FirstOrDefault();
+        }
+
+        public async Task Delete(string donationId)
+        {
+            Donation donation = this.entityRepository.All().FirstOrDefault(d => d.Id == donationId);
+
+            this.entityRepository.Delete(donation);
+            await this.entityRepository.SaveChangesAsync();
         }
     }
 }

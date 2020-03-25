@@ -1,0 +1,131 @@
+﻿
+@model BloodDonorship.Web.ViewModels.Donations.AllDonationsPerUserViewModel
+
+@{
+    ViewData["Title"] = "My Donations";
+    int count = 0;
+}
+
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+<p>
+    <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Index">Back to All</a>
+</p>
+<p>
+
+    @if (!Model.Donations.Any())
+    {
+        <div class="alert alert-success">
+            You have not made donations yet.
+        </div>
+    }
+    else if (Model.TimeFromLastDonation.Value.Days < 60)
+    {
+        <div class="alert alert-danger">
+            Time from last donation: <strong>@Model.TimeFromLastDonation.Value.Days days!</strong>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-success">
+            Time from last donation: More than two months.
+        </div>
+    }
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Donations.FirstOrDefault().CreatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Donations.FirstOrDefault().Beneficient)
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var donation in Model.Donations)
+        {
+            <tr>
+                <td>
+                    @donation.CreatedOn.ToString("dd-MMM-yyyy hh:mm")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => donation.Beneficient)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => donation.ImageTitle)
+                </td>
+                <td>
+                    <a asp-controller="Donations" asp-action="Download" asp-route-donationId="@donation.Id" class="btn btn-primary text-white">Download</a>
+                </td>
+                <td>
+                    @if (count > 0)
+                    {
+                        <button href="@Url.Action("Delete", "Donations", new { donationId = donation.Id})" class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-id="@donation.Id">Delete</button>
+                    }
+                </td>
+            </tr>
+
+            count++;
+        }
+    </tbody>
+</table>
+
+<!-- The Modal -->
+<div class="modal" id="confirmDelete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title text-danger">Warning!</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                Are you sure you want to delete the donation?
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger text-white" id="delete">Delete</button>
+                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        var donationId = "";
+
+    $('#confirmDelete').on('show.bs.modal', function (e) {
+
+        var message = $(e.relatedTarget).data('message');
+        $(this).find('.modal-body p').text(message);
+
+        var title = $(e.relatedTarget).data('title');
+        $(this).find('.modal-title').text(title);
+
+        donationId = $(e.relatedTarget).data('id');
+        
+    });
+
+    $('#confirmDelete').find('.modal-footer #delete').on('click', function () {
+        var urlToDelete = '@Url.Action("Delete", "Donations")?donationId=' + donationId;
+        console.log(urlToDelete);
+        //Here is your ajax delete call with above url
+    });
+    </script>
+}

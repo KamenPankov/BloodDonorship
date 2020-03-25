@@ -25,22 +25,25 @@
         </tr>
     </thead>
     <tbody>
-@foreach (AllRequestsPerUserViewModel request in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => request.CreatedOn)
-            </td>
-            <td>
-                @if (request.NotifiedUsersCount > 0)
-                {
-                <span>@($"{request.NotifiedUsersCount} potential donors have been notified.")</span> 
-                }
-            </td>
-            <td>               
-                <a href="Details?requestId=@request.Id" class="btn btn-success text-white">Donations</a>
-                <a href="Delete?requestId=@request.Id" class="btn btn-danger text-white">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (AllRequestsPerUserViewModel request in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => request.CreatedOn)
+                </td>
+                <td>
+                    @if (request.NotifiedUsersCount > 0)
+                    {
+                        <span>@($"{request.NotifiedUsersCount} potential donors have been notified.")</span>
+                    }
+                </td>
+                <td>
+                    <a href="Details?requestId=@request.Id" class="btn btn-success text-white">
+                        Donations <span class="badge badge-light">@request.DonationsCount</span>
+                    </a>
+                    <a href="Delete?requestId=@request.Id" class="btn btn-danger text-white">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

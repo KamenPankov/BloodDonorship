@@ -26,7 +26,7 @@
                 @Html.DisplayFor(modelItem => donation.ImageTitle)
             </td>
             <td>
-                <a href="Download?donationId=@donation.Id" class="btn btn-primary text-white">Download</a>
+                <a asp-controller="Donations" asp-action="Download" asp-route-donationId="@donation.Id" class="btn btn-primary text-white">Download</a>
             </td>
         </tr>
         }
