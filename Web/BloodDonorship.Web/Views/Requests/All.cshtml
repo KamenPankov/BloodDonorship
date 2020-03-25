@@ -12,38 +12,71 @@
     <a class="btn btn-primary" asp-controller="Requests" asp-action="Create">Create New</a>
     <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Index">Back to All</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedOn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NotifiedUsersCount)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (AllRequestsPerUserViewModel request in Model)
-        {
+
+<div class="table-responsive text-nowrap w-auto">
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => request.CreatedOn)
-                </td>
-                <td>
-                    @if (request.NotifiedUsersCount > 0)
-                    {
-                        <span>@($"{request.NotifiedUsersCount} potential donors have been notified.")</span>
-                    }
-                </td>
-                <td>
-                    <a href="Details?requestId=@request.Id" class="btn btn-success text-white">
-                        Donations <span class="badge badge-light">@request.DonationsCount</span>
-                    </a>
-                    <a href="Delete?requestId=@request.Id" class="btn btn-danger text-white">Delete</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedOn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NotifiedUsersCount)
+                </th>
+
+
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (AllRequestsPerUserViewModel request in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => request.CreatedOn)
+                    </td>
+                    <td>
+                        @if (request.NotifiedUsersCount > 0)
+                        {
+                            <span>@($"{request.NotifiedUsersCount} potential donors have been notified.")</span>
+                        }
+                    </td>
+                    <td>
+                        <a href="Details?requestId=@request.Id" class="btn btn-success text-white">
+                            Donations <span class="badge badge-light">@request.DonationsCount</span>
+                        </a>
+                        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-id="@request.Id">Delete</button>
+                        <form asp-action="Delete" asp-route-requestId="@request.Id">
+
+                            <!-- The Modal -->
+                            <div class="modal" id="confirmDelete">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title text-danger">Warning!</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            If you delete the request it will no longer be seen by potential donors!
+                                            Are you sure you want to delete the request?
+                                        </div>
+
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                                            <input type="submit" class="btn btn-danger text-white" id="delete" value="Delete" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

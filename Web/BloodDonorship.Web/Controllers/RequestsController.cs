@@ -92,23 +92,9 @@ namespace BloodDonorship.Web.Controllers
             return this.View(viewModel.Donations);
         }
 
-        [HttpGet]
-        public IActionResult Delete(string requestId)
+        public async Task<IActionResult> Delete(string requestId)
         {
-            this.TempData["DeleteMessage"] = "You are about to delete the request. It will no longer be seen by potential donors!";
-
-            DeleteRequestViewModel viewModel = new DeleteRequestViewModel()
-            {
-                Id = requestId,
-            };
-
-            return this.View(viewModel);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Delete(DeleteRequestViewModel viewModel)
-        {
-            await this.requestsService.Delete(viewModel.Id);
+            await this.requestsService.Delete(requestId);
 
             return this.RedirectToAction("All");
         }
