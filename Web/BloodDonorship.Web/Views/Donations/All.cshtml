@@ -54,6 +54,7 @@
     <tbody>
         @foreach (var donation in Model.Donations)
         {
+
             <tr>
                 <td>
                     @donation.CreatedOn.ToString("dd-MMM-yyyy hh:mm")
@@ -70,62 +71,47 @@
                 <td>
                     @if (count > 0)
                     {
-                        <button href="@Url.Action("Delete", "Donations", new { donationId = donation.Id})" class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-id="@donation.Id">Delete</button>
+                    <form  asp-action="Delete" asp-route-donationId="@donation.Id">
+                        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-id="@donation.Id">Delete</button>
+
+                        <!-- The Modal -->
+                        <div class="modal" id="confirmDelete">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title text-danger">Warning!</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        Are you sure you want to delete the donation?
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                                        <input type="submit" class="btn btn-danger text-white" id="delete" value="Delete"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                        
                     }
                 </td>
             </tr>
 
             count++;
+
+            
         }
     </tbody>
 </table>
 
-<!-- The Modal -->
-<div class="modal" id="confirmDelete">
-    <div class="modal-dialog">
-        <div class="modal-content">
 
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title text-danger">Warning!</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
 
-            <!-- Modal body -->
-            <div class="modal-body">
-                Are you sure you want to delete the donation?
-            </div>
 
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger text-white" id="delete">Delete</button>
-                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-@section scripts{
-    <script type="text/javascript">
-        var donationId = "";
-
-    $('#confirmDelete').on('show.bs.modal', function (e) {
-
-        var message = $(e.relatedTarget).data('message');
-        $(this).find('.modal-body p').text(message);
-
-        var title = $(e.relatedTarget).data('title');
-        $(this).find('.modal-title').text(title);
-
-        donationId = $(e.relatedTarget).data('id');
-        
-    });
-
-    $('#confirmDelete').find('.modal-footer #delete').on('click', function () {
-        var urlToDelete = '@Url.Action("Delete", "Donations")?donationId=' + donationId;
-        console.log(urlToDelete);
-        //Here is your ajax delete call with above url
-    });
-    </script>
-}
