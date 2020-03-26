@@ -9,6 +9,7 @@ using BloodDonorship.Data.Seeding;
 using BloodDonorship.Services.Data;
 using BloodDonorship.Services.Data.BloodsService;
 using BloodDonorship.Services.Data.DonationsService;
+using BloodDonorship.Services.Data.NotificationsService;
 using BloodDonorship.Services.Data.RequestsService;
 using BloodDonorship.Services.Data.UsersService;
 using BloodDonorship.Services.Mapping;
@@ -76,6 +77,7 @@ namespace BloodDonorship.Web
             services.AddTransient<IRequestsService, RequestsService>();
             services.AddTransient<IDonationsService, DonationsService>();
             services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<INotificationsService, NotificationsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 
 using BloodDonorship.Data.Models;
 using BloodDonorship.Services.Data.DonationsService;
+using BloodDonorship.Services.Data.NotificationsService;
 using BloodDonorship.Services.Data.RequestsService;
 using BloodDonorship.Services.Data.UsersService;
 using BloodDonorship.Services.Messaging;
+using BloodDonorship.Web.ViewModels.Notifications;
 using BloodDonorship.Web.ViewModels.Requests;
 using BloodDonorship.Web.ViewModels.Users;
 using Microsoft.AspNetCore.Authorization;
@@ -26,6 +28,7 @@ namespace BloodDonorship.Web.Controllers
         private readonly IDonationsService donationsService;
         private readonly IUsersService usersService;
         private readonly IEmailSender emailSender;
+        private readonly INotificationsService notificationsService;
 
         public RequestsController(
             UserManager<ApplicationUser> userManager,
@@ -33,7 +36,8 @@ namespace BloodDonorship.Web.Controllers
             IRequestsService requestsService,
             IDonationsService donationsService,
             IUsersService usersService,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            INotificationsService notificationsService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -41,6 +45,7 @@ namespace BloodDonorship.Web.Controllers
             this.donationsService = donationsService;
             this.usersService = usersService;
             this.emailSender = emailSender;
+            this.notificationsService = notificationsService;
         }
 
         [HttpGet]
@@ -72,9 +77,9 @@ namespace BloodDonorship.Web.Controllers
             IEnumerable<EligibleUserViewModel> eligibleUsers =
                 this.usersService.GetEligibleDonors(user);
 
-            await this.requestsService.Add(user.Id, eligibleUsers.Count());
+            string requestId = await this.requestsService.Add(user.Id, eligibleUsers.Count());
 
-            await this.NotifyEligibleDonorsAsync(eligibleUsers, user);
+            await this.NotifyEligibleDonorsAsync(eligibleUsers, user, requestId);
 
             return this.RedirectToAction("All");
         }
@@ -99,7 +104,8 @@ namespace BloodDonorship.Web.Controllers
             return this.RedirectToAction("All");
         }
 
-        private async Task NotifyEligibleDonorsAsync(IEnumerable<EligibleUserViewModel> eligibleUsers, ApplicationUser user)
+        private async Task NotifyEligibleDonorsAsync(
+            IEnumerable<EligibleUserViewModel> eligibleUsers, ApplicationUser user, string requestId)
         {
             string from = await this.userManager.GetEmailAsync(user);
             string fromName = await this.userManager.GetUserNameAsync(user);
@@ -108,6 +114,16 @@ namespace BloodDonorship.Web.Controllers
 
             foreach (EligibleUserViewModel donor in eligibleUsers)
             {
+                NotificationInputModel inputModel = new NotificationInputModel()
+                {
+                    SenderId = this.userManager.GetUserId(this.User),
+                    RecipientId = donor.Id,
+                    RequestId = requestId,
+                    Content = content,
+                };
+
+                await this.notificationsService.AddAsync(inputModel);
+
                 await this.emailSender.SendEmailAsync(from, fromName, donor.Email, subject, content);
             }
         }

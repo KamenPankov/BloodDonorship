@@ -18,6 +18,14 @@ namespace BloodDonorship.Services.Data.UsersService
             this.entityRepository = entityRepository;
         }
 
+        public string GetUserIdByEmail(string email)
+        {
+            return this.entityRepository.All()
+                .Where(u => u.Email == email)
+                .Select(u => u.Id)
+                .FirstOrDefault();
+        }
+
         public IEnumerable<EligibleUserViewModel> GetEligibleDonors(ApplicationUser user)
         {
             IEnumerable<(string BloodGroup, string RhFactor)> eligibleBloodTypes =

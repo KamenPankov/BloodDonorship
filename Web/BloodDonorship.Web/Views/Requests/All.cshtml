@@ -35,7 +35,11 @@
                         @Html.DisplayFor(modelItem => request.CreatedOn)
                     </td>
                     <td>
-                        @if (request.NotifiedUsersCount > 0)
+                        @if (request.NotifiedUsersCount == 1)
+                        {
+                            <span>@($"{request.NotifiedUsersCount} potential donor has been notified.")</span>
+                        }
+                        else if (request.NotifiedUsersCount > 0)
                         {
                             <span>@($"{request.NotifiedUsersCount} potential donors have been notified.")</span>
                         }

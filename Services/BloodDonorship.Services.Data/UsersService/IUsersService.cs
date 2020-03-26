@@ -7,6 +7,8 @@ namespace BloodDonorship.Services.Data.UsersService
 {
     public interface IUsersService
     {
+        string GetUserIdByEmail(string email);
+
         IEnumerable<EligibleUserViewModel> GetEligibleDonors(ApplicationUser user);
     }
 }
