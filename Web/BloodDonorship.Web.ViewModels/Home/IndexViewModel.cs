@@ -8,6 +8,8 @@ namespace BloodDonorship.Web.ViewModels.Home
 {
     public class IndexViewModel
     {
+        public string PageTitle { get; set; }
+
         public IEnumerable<AllRequestViewModel> AllRequests { get; set; }
     }
 }

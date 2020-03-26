@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics;
 using System.Threading.Tasks;
+
 using BloodDonorship.Data.Models;
 using BloodDonorship.Services.Data.RequestsService;
 using BloodDonorship.Web.ViewModels;
 using BloodDonorship.Web.ViewModels.Home;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,9 +16,10 @@ namespace BloodDonorship.Web.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
 
-        public HomeController(IRequestsService requestsService, 
-                              UserManager<ApplicationUser> userManager, 
-                              SignInManager<ApplicationUser> signInManager)
+        public HomeController(
+            IRequestsService requestsService,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager)
         {
             this.requestsService = requestsService;
             this.userManager = userManager;
@@ -26,7 +27,7 @@ namespace BloodDonorship.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string email = null)
         {
             ApplicationUser user = await this.userManager.GetUserAsync(this.User);
 
@@ -34,7 +35,12 @@ namespace BloodDonorship.Web.Controllers
             {
                 IndexViewModel viewModel = new IndexViewModel()
                 {
-                    AllRequests = this.requestsService.All<AllRequestViewModel>(),
+                    PageTitle = string.IsNullOrEmpty(email) ?
+                                    "All Requests" :
+                                    $"Results for: {email}",
+                    AllRequests = string.IsNullOrEmpty(email) ?
+                                    this.requestsService.All<AllRequestViewModel>() :
+                                    this.requestsService.AllByEmail<AllRequestViewModel>(email),
                 };
 
                 return this.View(viewModel);

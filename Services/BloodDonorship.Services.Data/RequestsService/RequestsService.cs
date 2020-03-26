@@ -41,6 +41,20 @@ namespace BloodDonorship.Services.Data.RequestsService
             return query.To<T>().ToArray();
         }
 
+        public IEnumerable<T> AllByEmail<T>(string email, int? count = null)
+        {
+            IQueryable<Request> query = this.requestsRepository.All()
+                .Where(r => r.User.Email.Contains(email))
+                .OrderByDescending(r => r.CreatedOn);
+
+            if (count.HasValue)
+            {
+                query.Take(count.Value);
+            }
+
+            return query.To<T>();
+        }
+
         public IEnumerable<T> AllByUser<T>(string userId, int? count = null)
         {
             IQueryable<Request> query = this.requestsRepository.All()

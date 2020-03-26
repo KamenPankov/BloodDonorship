@@ -7,7 +7,7 @@
 }
 
 
-<h1>@ViewData["Title"]</h1>
+<h2>@ViewData["Title"]</h2>
 <hr />
 
 <p>
@@ -19,6 +19,12 @@
     {
         <div class="alert alert-success">
             You have not made donations yet.
+        </div>
+    }
+    else if (Model.TimeFromLastDonation.Value.Days == 1)
+    {
+        <div class="alert alert-danger">
+            Time from last donation: <strong>@Model.TimeFromLastDonation.Value.Days day!</strong>
         </div>
     }
     else if (Model.TimeFromLastDonation.Value.Days < 60)
@@ -44,10 +50,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.Donations.FirstOrDefault().Beneficient)
             </th>
-            <th>
-            </th>
-            <th>
-            </th>
+            <th></th>
+            <th></th>
             <th></th>
         </tr>
     </thead>
@@ -105,9 +109,7 @@
                 </td>
             </tr>
 
-            count++;
-
-            
+            count++;            
         }
     </tbody>
 </table>
