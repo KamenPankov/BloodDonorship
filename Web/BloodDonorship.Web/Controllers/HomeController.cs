@@ -15,32 +15,34 @@ namespace BloodDonorship.Web.Controllers
     public class HomeController : BaseController
     {
         private readonly IRequestsService requestsService;
-        private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
 
         public HomeController(
             IRequestsService requestsService,
-            UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {
             this.requestsService = requestsService;
-            this.userManager = userManager;
             this.signInManager = signInManager;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(int? currentPage, string email = null)
+        public IActionResult Index(int? currentPage, string email = null)
         {
-            ApplicationUser user = await this.userManager.GetUserAsync(this.User);
-
             if (this.signInManager.IsSignedIn(this.User))
             {
-                if (!currentPage.HasValue)
+                if (!currentPage.HasValue || currentPage.Value < 1)
                 {
                     currentPage = 1;
                 }
 
                 int requestsCount = this.requestsService.RequestsCount();
+
+                int lastPage = (int)Math.Ceiling((decimal)requestsCount / GlobalConstants.RequestsPerPage);
+
+                if (currentPage > lastPage)
+                {
+                    currentPage = lastPage;
+                }
 
                 IndexViewModel viewModel = new IndexViewModel(requestsCount, currentPage.Value)
                 {
