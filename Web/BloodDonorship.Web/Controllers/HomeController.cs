@@ -1,6 +1,8 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
+using BloodDonorship.Common;
 using BloodDonorship.Data.Models;
 using BloodDonorship.Services.Data.RequestsService;
 using BloodDonorship.Web.ViewModels;
@@ -27,19 +29,27 @@ namespace BloodDonorship.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(string email = null)
+        public async Task<IActionResult> Index(int? currentPage, string email = null)
         {
             ApplicationUser user = await this.userManager.GetUserAsync(this.User);
 
             if (this.signInManager.IsSignedIn(this.User))
             {
-                IndexViewModel viewModel = new IndexViewModel()
+                if (!currentPage.HasValue)
+                {
+                    currentPage = 1;
+                }
+
+                int requestsCount = this.requestsService.RequestsCount();
+
+                IndexViewModel viewModel = new IndexViewModel(requestsCount, currentPage.Value)
                 {
                     PageTitle = string.IsNullOrEmpty(email) ?
                                     "All Requests" :
                                     $"Results for: {email}",
                     AllRequests = string.IsNullOrEmpty(email) ?
-                                    this.requestsService.All<AllRequestViewModel>() :
+                                    this.requestsService.All<AllRequestViewModel>
+                                        (currentPage.Value, GlobalConstants.RequestsPerPage) :
                                     this.requestsService.AllByEmail<AllRequestViewModel>(email),
                 };
 

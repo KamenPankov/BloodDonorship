@@ -5,7 +5,9 @@ namespace BloodDonorship.Services.Data.RequestsService
 {
     public interface IRequestsService
     {
-        IEnumerable<T> All<T>(int? count = null);
+        int RequestsCount();
+
+        IEnumerable<T> All<T>(int currentPage, int? count = null);
 
         IEnumerable<T> AllByUser<T>(string userId, int? count = null);
 

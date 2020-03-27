@@ -28,11 +28,19 @@ namespace BloodDonorship.Services.Data.UsersService
 
         public IEnumerable<EligibleUserViewModel> GetEligibleDonors(ApplicationUser user)
         {
-            IEnumerable<(string BloodGroup, string RhFactor)> eligibleBloodTypes =
+            IEnumerable<(string BloodGroup, string RhFactor)> eligibleBloodTypes;
+            if (user.Blood != null)
+            {
+                eligibleBloodTypes =
                 this.CompatableBloodTypes(user.Blood.BloodType, user.Blood.RhFactor);
+            }
+            else
+            {
+                eligibleBloodTypes = new List<(string, string)>();
+            }
 
             IEnumerable<ApplicationUser> query = this.entityRepository.All().AsEnumerable()
-                .Where(u => u.Id != user.Id &&
+                .Where(u => u.Id != user.Id && u.Blood != null &&
                 eligibleBloodTypes
                 .Any(b => (b.BloodGroup == u.Blood.BloodType.ToString() && b.RhFactor == u.Blood.RhFactor.ToString())) &&
                 (DateTime.UtcNow - u.Donations

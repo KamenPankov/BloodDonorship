@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 
+using BloodDonorship.Common;
 using BloodDonorship.Data.Common.Repositories;
 using BloodDonorship.Data.Models;
 using BloodDonorship.Services.Mapping;
@@ -32,14 +33,14 @@ namespace BloodDonorship.Services.Data.RequestsService
             return request.Id;
         }
 
-        public IEnumerable<T> All<T>(int? count = null)
+        public IEnumerable<T> All<T>(int currentPage, int? count = null)
         {
             IQueryable<Request> query = this.requestsRepository.All()
                 .OrderByDescending(r => r.CreatedOn);
 
             if (count.HasValue)
             {
-                query.Take(count.Value);
+                query = query.Skip((currentPage - 1) * count.Value).Take(count.Value);
             }
 
             return query.To<T>().ToArray();
@@ -91,6 +92,11 @@ namespace BloodDonorship.Services.Data.RequestsService
                 .Where(r => r.Id == requestId)
                 .Select(r => r.UserId)
                 .FirstOrDefault();
+        }
+
+        public int RequestsCount()
+        {
+            return this.requestsRepository.All().Count();
         }
     }
 }
