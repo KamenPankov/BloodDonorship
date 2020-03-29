@@ -13,7 +13,7 @@ namespace BloodDonorship.Web.ViewModels.Donations
             {
                 if (this.Donations.Any())
                 {
-                    return DateTime.UtcNow - this.Donations.OrderByDescending(d => d.CreatedOn).ToArray()[0].CreatedOn;
+                    return DateTime.UtcNow - this.Donations.ToArray()[0].CreatedOn;
                 }
 
                 return DateTime.UtcNow - default(DateTime);

@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-using AutoMapper;
+﻿using AutoMapper;
 using BloodDonorship.Data.Models;
 using BloodDonorship.Services.Mapping;
 
@@ -36,7 +34,9 @@ namespace BloodDonorship.Web.ViewModels.Home
                 .ForMember(d => d.UserUserName, o => o.MapFrom(s => s.User.UserName));
 
             configuration.CreateMap<BloodDonorship.Data.Models.Request, AllRequestViewModel>()
-                .ForMember(c => c.CreatedOn, o => o.MapFrom(s => s.CreatedOn.ToString("dd-MMM-yyyy hh:mm", CultureInfo.InvariantCulture)));
+                .ForMember(c => c.CreatedOn, o => o.MapFrom(s => s.CreatedOn.ToString("dd-MMM-yyyy hh:mm")));
         }
     }
+
+
 }
