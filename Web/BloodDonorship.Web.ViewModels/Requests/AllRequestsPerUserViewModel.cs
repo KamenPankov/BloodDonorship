@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using System.Globalization;
 using AutoMapper;
+using BloodDonorship.Common;
 using BloodDonorship.Data.Models;
 using BloodDonorship.Services.Mapping;
 
@@ -21,7 +22,8 @@ namespace BloodDonorship.Web.ViewModels.Requests
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<BloodDonorship.Data.Models.Request, AllRequestsPerUserViewModel>()
-                .ForMember(c => c.CreatedOn, o => o.MapFrom(s => s.CreatedOn.ToString("dd-MMM-yyyy hh:mm")));
+                .ForMember(d => d.CreatedOn, o =>
+                    o.MapFrom(s => s.CreatedOn.ToString(GlobalConstants.DateFormat, CultureInfo.InvariantCulture)));
         }
     }
 }
