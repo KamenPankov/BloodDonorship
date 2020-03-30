@@ -1,4 +1,6 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
 using AutoMapper;
 using BloodDonorship.Common;
@@ -11,8 +13,10 @@ namespace BloodDonorship.Web.ViewModels.Notifications
     {
         public string Id { get; set; }
 
+        [Display(Name = "Received On")]
         public string CreatedOn { get; set; }
 
+        [Display(Name = "From")]
         public string SenderUserName { get; set; }
 
         public string Content { get; set; }

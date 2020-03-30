@@ -1,0 +1,49 @@
+﻿@model BloodDonorship.Web.ViewModels.Notifications.AllNotificationsPerRecipientViewModel
+
+@{
+    ViewData["Title"] = "All";
+}
+
+<h1>@this.ViewData["Title"]</h1>
+
+<p>
+    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+</p>
+<hr />
+
+<div class="table table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <label asp-for="@Model.Notifications.FirstOrDefault().CreatedOn"></label>
+                </th>
+                <th>
+                    <label asp-for="@Model.Notifications.FirstOrDefault().SenderUserName"></label>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var notification in Model.Notifications)
+            {
+                <tr>
+                    <td>
+                        @notification.CreatedOn
+                    </td>
+                    <td>
+                        @notification.SenderUserName
+                    </td>
+                    <td>
+                        @notification.Content
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
