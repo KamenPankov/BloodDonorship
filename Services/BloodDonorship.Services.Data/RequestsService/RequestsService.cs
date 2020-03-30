@@ -35,6 +35,11 @@ namespace BloodDonorship.Services.Data.RequestsService
 
         public IEnumerable<T> All<T>(int currentPage, int? count = null)
         {
+            if (currentPage < 1)
+            {
+                currentPage = 1;
+            }
+
             IQueryable<Request> query = this.requestsRepository.All()
                 .OrderByDescending(r => r.CreatedOn);
 
@@ -57,7 +62,7 @@ namespace BloodDonorship.Services.Data.RequestsService
                 query.Take(count.Value);
             }
 
-            return query.To<T>();
+            return query.To<T>().ToArray();
         }
 
         public IEnumerable<T> AllByUser<T>(string userId, int? count = null)

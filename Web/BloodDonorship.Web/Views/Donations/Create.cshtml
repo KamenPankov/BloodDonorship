@@ -30,7 +30,7 @@
             </div>
             <div class="form-group" hidden>
                 <label asp-for="UserId" class="control-label"></label>
-                <input type="text" name="UserId" value="@UserManager.GetUserId(this.User)" class="form-control"/>
+                <input type="text" name="UserId" value="@UserManager.GetUserId(this.User)" class="form-control" />
                 <span asp-validation-for="UserId" class="text-danger"></span>
             </div>
 
@@ -42,7 +42,9 @@
                 <span asp-validation-for="FormFile" class="text-danger"></span>
             </div>
 
-
+            <div>
+                <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Index">Cancel</a>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Donate" class="btn btn-primary" />
             </div>
@@ -50,9 +52,7 @@
     </div>
 </div>
 
-<div>
-    <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Index">Cancel</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

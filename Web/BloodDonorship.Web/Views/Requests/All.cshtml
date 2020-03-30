@@ -1,5 +1,5 @@
-﻿@using BloodDonorship.Web.ViewModels.Requests
-@model IEnumerable<BloodDonorship.Web.ViewModels.Requests.AllRequestsPerUserViewModel>
+﻿
+@model BloodDonorship.Web.ViewModels.Requests.AllRequestsPerUserViewModel
 
 @{
     ViewData["Title"] = "My Requests";
@@ -13,23 +13,24 @@
     <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Index">Back to All</a>
 </p>
 
-<div class="table-responsive text-nowrap w-auto">
+<div class="table table-responsive text-nowrap w-auto">
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.CreatedOn)
+                    @Html.DisplayNameFor(model => model.Requests.FirstOrDefault().CreatedOn)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.NotifiedUsersCount)
+                    @Html.DisplayNameFor(model => model.Requests.FirstOrDefault().NotifiedUsersCount)
                 </th>
-
-
+                
             </tr>
         </thead>
         <tbody>
-            @foreach (AllRequestsPerUserViewModel request in Model)
+            @foreach (var request in Model.Requests)
             {
+                string confirmDelete = string.Concat("confirmDelete", request.Id);
+
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => request.CreatedOn)
@@ -45,41 +46,50 @@
                         }
                     </td>
                     <td>
-                        <a href="Details?requestId=@request.Id" class="btn btn-success text-white">
-                            Donations <span class="badge badge-light">@request.DonationsCount</span>
-                        </a>
-                        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-id="@request.Id">Delete</button>
-                        <form asp-action="Delete" asp-route-requestId="@request.Id">
+                        <div>
+                            <a href="Details?requestId=@request.Id" class="btn btn-success text-white">
+                                Donations <span class="badge badge-light">@request.DonationsCount</span>
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <form asp-action="Delete" asp-route-requestId="@request.Id">
+                                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#@confirmDelete" data-id="@request.Id">Delete</button>
 
-                            <!-- The Modal -->
-                            <div class="modal" id="confirmDelete">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
+                                <!-- The Modal -->
+                                <div class="modal" id="@confirmDelete">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
 
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title text-danger">Warning!</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <h4 class="modal-title text-danger">Warning!</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+
+                                            <!-- Modal body -->
+                                            <div class="modal-body">
+                                                <p class="text-wrap">
+                                                    If you delete the request it will no longer be seen by potential donors.
+                                                    Are you sure you want to delete the request?
+                                                    @request.Id
+                                                </p>
+
+                                            </div>
+
+                                            <!-- Modal footer -->
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                                                <input type="submit" class="btn btn-danger text-white" id="delete" value="Delete" />
+                                            </div>
+
                                         </div>
-
-                                        <!-- Modal body -->
-                                        <div class="modal-body">
-                                            <p class="text-wrap">
-                                                If you delete the request it will no longer be seen by potential donors!
-                                                Are you sure you want to delete the request?
-                                            </p>                                            
-                                        </div>
-
-                                        <!-- Modal footer -->
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                                            <input type="submit" class="btn btn-danger text-white" id="delete" value="Delete" />
-                                        </div>
-
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
+
                     </td>
                 </tr>
             }

@@ -59,7 +59,7 @@
     <tbody>
         @foreach (var donation in Model.Donations)
         {
-
+            string confirmDelete = string.Concat("confirmDelete", donation.Id);
             <tr>
                 <td>
                     @donation.CreatedOn.ToString(GlobalConstants.DateFormat, CultureInfo.InvariantCulture)
@@ -76,41 +76,41 @@
                 <td>
                     @if (count > 0)
                     {
-                    <form  asp-action="Delete" asp-route-donationId="@donation.Id">
-                        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-id="@donation.Id">Delete</button>
+                        <form asp-action="Delete" asp-route-donationId="@donation.Id">
+                            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#@confirmDelete" data-id="@donation.Id">Delete</button>
 
-                        <!-- The Modal -->
-                        <div class="modal" id="confirmDelete">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
+                            <!-- The Modal -->
+                            <div class="modal" id="@confirmDelete">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
 
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                        <h4 class="modal-title text-danger">Warning!</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title text-danger">Warning!</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            Are you sure you want to delete the donation?
+                                            @donation.Id
+                                        </div>
+
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                                            <input type="submit" class="btn btn-danger text-white" id="delete" value="Delete" />
+                                        </div>
                                     </div>
-
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        Are you sure you want to delete the donation?
-                                    </div>
-
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                                        <input type="submit" class="btn btn-danger text-white" id="delete" value="Delete"/>
-                                    </div>
-
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                        
+                        </form>
+
                     }
                 </td>
             </tr>
 
-            count++;            
+            count++;
         }
     </tbody>
 </table>

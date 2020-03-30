@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 using BloodDonorship.Data.Models;
 using BloodDonorship.Services.Data.DonationsService;
+using BloodDonorship.Services.Data.NotificationsService;
 using BloodDonorship.Services.Data.RequestsService;
+using BloodDonorship.Services.Messaging;
 using BloodDonorship.Web.ViewModels.Donations;
+using BloodDonorship.Web.ViewModels.Notifications;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -20,17 +23,23 @@ namespace BloodDonorship.Web.Controllers
     {
         private readonly IDonationsService donationsService;
         private readonly IRequestsService requestsService;
+        private readonly IEmailSender emailSender;
+        private readonly INotificationsService notificationsService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
 
         public DonationsController(
             IDonationsService donationsService,
             IRequestsService requestsService,
+            IEmailSender emailSender,
+            INotificationsService notificationsService,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {
             this.donationsService = donationsService;
             this.requestsService = requestsService;
+            this.emailSender = emailSender;
+            this.notificationsService = notificationsService;
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
@@ -87,6 +96,8 @@ namespace BloodDonorship.Web.Controllers
             this.TempData["Success"] =
                 $"Successfully donated to {await this.userManager.FindByIdAsync(this.requestsService.GetUserId(viewModel.RequestId))}!";
 
+            await this.NotifyBeneficientAsync(viewModel.UserId, viewModel.RequestId);
+
             return this.RedirectToAction("Index", "Home");
         }
 
@@ -123,6 +134,32 @@ namespace BloodDonorship.Web.Controllers
             await this.donationsService.Delete(donationId);
 
             return this.RedirectToAction("All");
+        }
+
+        private async Task NotifyBeneficientAsync(string userId, string requestId)
+        {
+            ApplicationUser user = await this.userManager.FindByIdAsync(userId);
+            string from = await this.userManager.GetEmailAsync(user);
+            string fromName = user.UserName;
+
+            string beneficienId = this.requestsService.GetUserId(requestId);
+            ApplicationUser beneficient = await this.userManager.FindByIdAsync(beneficienId);
+            string to = await this.userManager.GetEmailAsync(beneficient);
+
+            string subject = $"Blood Donation from {fromName}";
+            string content = $"{fromName} has made a blood donation for you! You can view the verification document in BloodDonorship.";
+
+            NotificationInputModel inputModel = new NotificationInputModel()
+            {
+                SenderId = userId,
+                RecipientId = beneficienId,
+                RequestId = requestId,
+                Content = content,
+            };
+
+            await this.notificationsService.AddAsync(inputModel);
+
+            await this.emailSender.SendEmailAsync(from, fromName, to, subject, content);
         }
     }
 }

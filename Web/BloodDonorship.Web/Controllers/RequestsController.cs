@@ -58,10 +58,12 @@ namespace BloodDonorship.Web.Controllers
                 return this.RedirectToAction("Index", "Home");
             }
 
-            IEnumerable<AllRequestsPerUserViewModel> requests =
-                this.requestsService.AllByUser<AllRequestsPerUserViewModel>(user.Id);
+            AllRequestsPerUserViewModel viewModel = new AllRequestsPerUserViewModel()
+            {
+                Requests = this.requestsService.AllByUser<RequestPerUserViewModel>(user.Id),
+            };
 
-            return this.View(requests);
+            return this.View(viewModel);
         }
 
         [HttpGet]
