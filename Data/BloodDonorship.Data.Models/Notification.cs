@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 using BloodDonorship.Data.Common.Models;
+using BloodDonorship.Data.Models.Enums;
 
 namespace BloodDonorship.Data.Models
 {
@@ -25,6 +26,8 @@ namespace BloodDonorship.Data.Models
         public string RequestId { get; set; }
 
         public virtual Request Request { get; set; }
+
+        public NotificationType NotificationType { get; set; }
 
         [MaxLength(1000)]
         public string Content { get; set; }

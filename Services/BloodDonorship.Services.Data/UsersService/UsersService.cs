@@ -55,7 +55,7 @@ namespace BloodDonorship.Services.Data.UsersService
             }).ToArray();
         }
 
-        private IEnumerable<(string BloodGroup, string RhFactor)> CompatableBloodTypes(BloodType bloodType, RhFactor rhFactor)
+        public IEnumerable<(string BloodGroup, string RhFactor)> CompatableBloodTypes(BloodType bloodType, RhFactor rhFactor)
         {
             Dictionary<(string, string), List<(string, string)>> compatableBloods =
                 new Dictionary<(string, string), List<(string, string)>>()
@@ -112,7 +112,13 @@ namespace BloodDonorship.Services.Data.UsersService
                         ("O", "Negative"),
                     },
                 };
-            List<(string, string)> resultBloods = compatableBloods[(bloodType.ToString(), rhFactor.ToString())];
+
+            List<(string, string)> resultBloods = new List<(string, string)>();
+            if (compatableBloods.ContainsKey((bloodType.ToString(), rhFactor.ToString())))
+            {
+                resultBloods = compatableBloods[(bloodType.ToString(), rhFactor.ToString())];
+            }
+
             return resultBloods;
         }
     }

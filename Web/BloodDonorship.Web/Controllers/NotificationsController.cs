@@ -1,4 +1,6 @@
-﻿using BloodDonorship.Data.Models;
+﻿using System.Threading.Tasks;
+
+using BloodDonorship.Data.Models;
 using BloodDonorship.Services.Data.NotificationsService;
 using BloodDonorship.Web.ViewModels.Notifications;
 using Microsoft.AspNetCore.Authorization;
@@ -32,6 +34,13 @@ namespace BloodDonorship.Web.Controllers
             };
 
             return this.View(viewModel);
+        }
+
+        public async Task<IActionResult> Delete(string notificationId)
+        {
+            await this.notificationsService.Delete(notificationId);
+
+            return this.RedirectToAction("All");
         }
     }
 }

@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 using BloodDonorship.Data.Common.Repositories;
 using BloodDonorship.Data.Models;
+using BloodDonorship.Data.Models.Enums;
 using BloodDonorship.Services.Mapping;
 using BloodDonorship.Web.ViewModels.Notifications;
 
@@ -25,6 +27,7 @@ namespace BloodDonorship.Services.Data.NotificationsService
                 SenderId = inputModel.SenderId,
                 RecipientId = inputModel.RecipientId,
                 RequestId = inputModel.RequestId,
+                NotificationType = Enum.Parse<NotificationType>(inputModel.NotificationType),
                 Content = inputModel.Content,
             };
 
@@ -44,6 +47,18 @@ namespace BloodDonorship.Services.Data.NotificationsService
             }
 
             return query.To<T>().ToArray();
+        }
+
+        public async Task Delete(string notificationId)
+        {
+            Notification notification = this.entityRepository.All()
+                .FirstOrDefault(n => n.Id == notificationId);
+
+            if (notificationId != null)
+            {
+                this.entityRepository.Delete(notification);
+                await this.entityRepository.SaveChangesAsync();
+            }
         }
     }
 }

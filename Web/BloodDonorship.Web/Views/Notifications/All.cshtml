@@ -1,49 +1,68 @@
 ﻿@model BloodDonorship.Web.ViewModels.Notifications.AllNotificationsPerRecipientViewModel
 
 @{
-    ViewData["Title"] = "All";
+    ViewData["Title"] = "Notifications";
 }
 
-<h1>@this.ViewData["Title"]</h1>
+<h2>@this.ViewData["Title"]: @(Model.Notifications.Count() == 0 ? "no notifications" : Model.Notifications.Count().ToString())</h2>
+<hr />
 
 <p>
-    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">Home</a>
 </p>
 <hr />
 
-<div class="table table-responsive">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    <label asp-for="@Model.Notifications.FirstOrDefault().CreatedOn"></label>
-                </th>
-                <th>
-                    <label asp-for="@Model.Notifications.FirstOrDefault().SenderUserName"></label>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var notification in Model.Notifications)
-            {
-                <tr>
-                    <td>
-                        @notification.CreatedOn
-                    </td>
-                    <td>
-                        @notification.SenderUserName
-                    </td>
-                    <td>
-                        @notification.Content
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+@foreach (var notification in Model.Notifications)
+{
+    string confirmDelete = string.Concat("confirmDelete", notification.Id);
+    <div class="card">
+        <div class="card-header">
+            Message
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">From: @notification.SenderUserName</h5>
+            <p class="card-text">@notification.CreatedOn</p>
+            <p class="card-text">@notification.Content</p>
+            <div class="card-text text-right">
+
+                <form asp-action="Delete" asp-route-notificationId="@notification.Id">
+                    @if (notification.NotificationType == "Request")
+                    {
+                        <a asp-controller="Home" asp-action="Index" asp-route-email="@notification.SenderUserName" class="btn btn-primary">Find</a>
+                    }
+                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#@confirmDelete" data-id="@notification.Id">Delete</button>
+
+                    <!-- The Modal -->
+                    <div class="modal" id="@confirmDelete">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title text-danger">Warning!</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    Are you sure you want to delete the message from <span class="text text-primary">@notification.SenderUserName</span>?
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                                    <input type="submit" class="btn btn-danger text-white" id="delete" value="Delete" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+}
+
+
+
 

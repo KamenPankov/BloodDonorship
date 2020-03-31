@@ -154,6 +154,7 @@ namespace BloodDonorship.Web.Controllers
                 SenderId = userId,
                 RecipientId = beneficienId,
                 RequestId = requestId,
+                NotificationType = "Donation",
                 Content = content,
             };
 

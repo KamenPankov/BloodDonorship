@@ -122,8 +122,6 @@ namespace BloodDonorship.Web
                 endpoints =>
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-                        endpoints.MapControllerRoute("bloodRequests", "Requests/All", new { controller = "Requests", action = "All" });
-                        endpoints.MapControllerRoute("bloodRequest", "Requests/Create", new { controller = "Requests", action = "Create" });
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });

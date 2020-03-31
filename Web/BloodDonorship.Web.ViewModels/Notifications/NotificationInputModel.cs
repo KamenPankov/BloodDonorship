@@ -10,6 +10,8 @@ namespace BloodDonorship.Web.ViewModels.Notifications
 
         public string RequestId { get; set; }
 
+        public string NotificationType { get; set; }
+
         [MaxLength(1000)]
         public string Content { get; set; }
     }

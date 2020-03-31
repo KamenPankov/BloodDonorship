@@ -19,13 +19,17 @@ namespace BloodDonorship.Web.ViewModels.Notifications
         [Display(Name = "From")]
         public string SenderUserName { get; set; }
 
+        public string NotificationType { get; set; }
+
         public string Content { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Notification, NotificationPerRecicpientViewModel>()
                 .ForMember(d => d.CreatedOn, options =>
-                options.MapFrom(s => s.CreatedOn.ToString(GlobalConstants.DateFormat, CultureInfo.InvariantCulture)));
+                options.MapFrom(s => s.CreatedOn.ToString(GlobalConstants.DateFormat, CultureInfo.InvariantCulture)))
+                .ForMember(d => d.NotificationType, options =>
+                options.MapFrom(s => s.NotificationType.ToString()));
         }
     }
 }

@@ -121,6 +121,7 @@ namespace BloodDonorship.Web.Controllers
                     SenderId = this.userManager.GetUserId(this.User),
                     RecipientId = donor.Id,
                     RequestId = requestId,
+                    NotificationType = "Request",
                     Content = content,
                 };
 

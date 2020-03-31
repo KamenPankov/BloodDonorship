@@ -10,5 +10,7 @@ namespace BloodDonorship.Services.Data.NotificationsService
         Task AddAsync(NotificationInputModel inputModel);
 
         IEnumerable<T> AllByUser<T>(string userId, int? count = null);
+
+        Task Delete(string notificationId);
     }
 }
