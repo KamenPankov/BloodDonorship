@@ -16,13 +16,16 @@ namespace BloodDonorship.Web.Controllers
     {
         private readonly IRequestsService requestsService;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public HomeController(
             IRequestsService requestsService,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            UserManager<ApplicationUser> userManager)
         {
             this.requestsService = requestsService;
             this.signInManager = signInManager;
+            this.userManager = userManager;
         }
 
         [HttpGet]

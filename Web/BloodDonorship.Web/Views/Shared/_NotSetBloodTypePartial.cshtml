@@ -1,0 +1,24 @@
+﻿@using BloodDonorship.Common
+@using BloodDonorship.Data.Models
+@using BloodDonorship.Data.Models.Enums
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    bool isBloodTypeSet = true;
+    if (SignInManager.IsSignedIn(this.User))
+    {
+        ApplicationUser user = UserManager.GetUserAsync(this.User).GetAwaiter().GetResult();
+        isBloodTypeSet = user.Blood == null ||
+            (user.Blood.BloodType == BloodType.Unspecified && user.Blood.RhFactor == RhFactor.Unspecified) ? false : true;
+    }
+
+}
+
+@if (!isBloodTypeSet)
+{
+    <div class="alert alert-danger">
+        <strong>You have not set your blood type!</strong> Setting the correct blood type is crucial for the functionality of the application.
+    </div>
+}

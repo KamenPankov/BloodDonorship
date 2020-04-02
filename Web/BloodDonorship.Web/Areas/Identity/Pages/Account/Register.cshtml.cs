@@ -23,16 +23,19 @@ namespace BloodDonorship.Web.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<ApplicationRole> roleManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
+            RoleManager<ApplicationRole> roleManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
+            this.roleManager = roleManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
@@ -83,6 +86,14 @@ namespace BloodDonorship.Web.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    bool isAdminExist = (await this._userManager.GetUsersInRoleAsync("Administrator")).Any();
+
+                    if (!isAdminExist)
+                    {
+                        await this.CreateAdminUser(user);
+                        this._logger.LogInformation("Administrator is created.");
+                    }
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
@@ -112,6 +123,23 @@ namespace BloodDonorship.Web.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        private async Task CreateAdminUser(ApplicationUser user)
+        {
+
+            bool isRoleExists = await this.roleManager.RoleExistsAsync("Administrator");
+            if (!isRoleExists)
+            {
+                ApplicationRole identityRole = new ApplicationRole()
+                {
+                    Name = "Administrator",
+                };
+
+                await this.roleManager.CreateAsync(identityRole);
+            }
+
+            await this._userManager.AddToRoleAsync(user, "Administrator");
         }
     }
 }
