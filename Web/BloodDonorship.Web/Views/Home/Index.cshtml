@@ -17,7 +17,7 @@
         <div class="col-sm-6">
             @if (Model.PageTitle == "All Requests")
             {
-            <h2>@Model.PageTitle</h2>
+                <h2>@Model.PageTitle</h2>
             }
             else
             {
@@ -49,20 +49,7 @@
             <strong>@this.TempData["Success"]</strong>
         </div>
     }
-    <div class="row">
-        <div class="col-sm-4">
-            <a class="btn btn-success @(Model.HasPreviousPage && Model.PageTitle == "All Requests" ? string.Empty : "disabled")" asp-action="Index" asp-route-currentPage="@(Model.CurrentPage - 1)">Recent</a>
-        </div>
-        <div class="col-sm-4 text-center align-text-bottom">
-            <span class="badge badge-success">
-            @(Model.PageTitle  == "All Requests" ? string.Concat("page ", Model.CurrentPage, ", ", Model.TotalPages, " total") : string.Empty) 
-            </span>
-        </div>
-        <div class="col-sm-4 text-right">
-            <a class="btn btn-success @(Model.HasNextPage && Model.PageTitle == "All Requests" ? string.Empty : "disabled")" asp-action="Index" asp-route-currentPage="@(Model.CurrentPage + 1)">Older</a>
-        </div>
-    </div>
-    <br />
+    
     <div class="row">
         @foreach (AllRequestViewModel request in Model.AllRequests)
         {
@@ -79,6 +66,29 @@
             </div>
         }
     </div>
+    <br />
+
+    <nav aria-label="...">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(Model.HasPreviousPage && Model.PageTitle == "All Requests" ? string.Empty : "disabled")">
+                <a class="btn btn-outline-primary @(Model.HasPreviousPage && Model.PageTitle == "All Requests" ? string.Empty : "disabled")"
+                   asp-action="Index" 
+                   asp-route-currentPage="@(Model.CurrentPage - 1)" tabindex="-1">Previous</a>
+            </li>
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(Model.CurrentPage == i ? "active" : string.Empty)">
+                    <a class="page-link" asp-action="Index" asp-route-currentPage="@i">@i</a>
+                </li>
+            }
+                        
+            <li class="page-item @(Model.HasNextPage && Model.PageTitle == "All Requests" ? string.Empty : "disabled")">
+                <a class="btn btn-outline-primary @(Model.HasNextPage && Model.PageTitle == "All Requests" ? string.Empty : "disabled")"
+                   asp-action="Index" 
+                   asp-route-currentPage="@(Model.CurrentPage + 1)" tabindex="-1">Next</a>
+            </li>
+        </ul>
+    </nav>
 
 }
 else

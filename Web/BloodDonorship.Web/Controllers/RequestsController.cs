@@ -79,7 +79,7 @@ namespace BloodDonorship.Web.Controllers
             IEnumerable<EligibleUserViewModel> eligibleUsers =
                 this.usersService.GetEligibleDonors(user);
 
-            string requestId = await this.requestsService.Add(user.Id, eligibleUsers.Count());
+            string requestId = await this.requestsService.AddAsync(user.Id, eligibleUsers.Count());
 
             await this.NotifyEligibleDonorsAsync(eligibleUsers, user, requestId);
 

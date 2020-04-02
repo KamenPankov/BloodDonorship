@@ -18,7 +18,7 @@ namespace BloodDonorship.Services.Data.RequestsService
             this.requestsRepository = requestsRepository;
         }
 
-        public async Task<string> Add(string userId, int notifiedUsersCount)
+        public async Task<string> AddAsync(string userId, int notifiedUsersCount)
         {
             Request request = new Request()
             {

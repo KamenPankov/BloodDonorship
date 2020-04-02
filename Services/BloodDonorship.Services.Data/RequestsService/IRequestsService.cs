@@ -13,7 +13,7 @@ namespace BloodDonorship.Services.Data.RequestsService
 
         IEnumerable<T> AllByEmail<T>(string email, int? count = null);
 
-        Task<string> Add(string userId, int notifiedUsersCount);
+        Task<string> AddAsync(string userId, int notifiedUsersCount);
 
         string GetUserId(string requestId); // Requesrer
 

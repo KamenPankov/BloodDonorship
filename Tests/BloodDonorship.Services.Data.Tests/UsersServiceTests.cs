@@ -14,6 +14,31 @@ namespace BloodDonorship.Services.Data.Tests
 {
     public class UsersServiceTests
     {
+        private readonly IUsersService usersService;
+        private IEnumerable<ApplicationUser> testUsersList;
+        private Mock<IDeletableEntityRepository<ApplicationUser>> repositoryMock;
+        private ApplicationUser testUser;
+
+        public UsersServiceTests()
+        {
+            this.testUsersList = this.GetTestData();
+
+            this.repositoryMock = new Mock<IDeletableEntityRepository<ApplicationUser>>();
+            this.repositoryMock.Setup(r => r.All())
+                .Returns(this.testUsersList.AsQueryable<ApplicationUser>());
+
+            this.usersService = new UsersService.UsersService(this.repositoryMock.Object);
+            this.testUser = new ApplicationUser()
+            {
+                Blood = new Blood()
+                {
+                    BloodType = BloodType.A,
+                    RhFactor = RhFactor.Negative,
+                },
+                Email = $"test_userANegative@gmail.com",
+            };
+        }
+
         public IEnumerable<ApplicationUser> GetTestData()
         {
             string[] bloodTypes = { "A", "B", "AB", "O" };
@@ -56,15 +81,14 @@ namespace BloodDonorship.Services.Data.Tests
         [Fact]
         public void CompatableBloodTypesReturnsRightBloodListForAPositiveTest()
         {
-            var repositoryMock = new Mock<IDeletableEntityRepository<ApplicationUser>>();
-
-            repositoryMock.Setup(r => r.All())
-                .Returns(this.GetTestData().AsQueryable<ApplicationUser>());
-
-            IUsersService usersService = new UsersService.UsersService(repositoryMock.Object);
-
-            IEnumerable<(string, string)> resultBloods = usersService.CompatableBloodTypes(BloodType.A, RhFactor.Positive);
-            IEnumerable<(string, string)> expectedBloods = new List<(string, string)> { ("A", "Positive"), ("A", "Negative"), ("O", "Positive"), ("O", "Negative") };
+            IEnumerable<(string, string)> resultBloods = this.usersService.CompatableBloodTypes(BloodType.A, RhFactor.Positive);
+            IEnumerable<(string, string)> expectedBloods = new List<(string, string)>
+            {
+                ("A", "Positive"),
+                ("A", "Negative"),
+                ("O", "Positive"),
+                ("O", "Negative"),
+            };
 
             Assert.True(resultBloods.Count() == 4);
             Assert.Equal(expectedBloods, resultBloods);
@@ -73,14 +97,7 @@ namespace BloodDonorship.Services.Data.Tests
         [Fact]
         public void CompatableBloodTypesReturnsRightBloodListForABPositiveTest()
         {
-            var repositoryMock = new Mock<IDeletableEntityRepository<ApplicationUser>>();
-
-            repositoryMock.Setup(r => r.All())
-                .Returns(this.GetTestData().AsQueryable<ApplicationUser>());
-
-            IUsersService usersService = new UsersService.UsersService(repositoryMock.Object);
-
-            IEnumerable<(string, string)> resultBloods = usersService.CompatableBloodTypes(BloodType.AB, RhFactor.Positive);
+            IEnumerable<(string, string)> resultBloods = this.usersService.CompatableBloodTypes(BloodType.AB, RhFactor.Positive);
             IEnumerable<(string, string)> expectedBloods =
                 new List<(string, string)>
                 {
@@ -101,14 +118,7 @@ namespace BloodDonorship.Services.Data.Tests
         [Fact]
         public void CompatableBloodTypesReturnsRightBloodListForUnspecifiedUnspecifiedTest()
         {
-            var repositoryMock = new Mock<IDeletableEntityRepository<ApplicationUser>>();
-
-            repositoryMock.Setup(r => r.All())
-                .Returns(this.GetTestData().AsQueryable<ApplicationUser>());
-
-            IUsersService usersService = new UsersService.UsersService(repositoryMock.Object);
-
-            IEnumerable<(string, string)> resultBloods = usersService.CompatableBloodTypes(BloodType.Unspecified, RhFactor.Unspecified);
+            IEnumerable<(string, string)> resultBloods = this.usersService.CompatableBloodTypes(BloodType.Unspecified, RhFactor.Unspecified);
             IEnumerable<(string, string)> expectedBloods = new List<(string, string)>();
 
             Assert.True(resultBloods.Count() == 0);
@@ -116,226 +126,157 @@ namespace BloodDonorship.Services.Data.Tests
         }
 
         [Fact]
-        public void GetEligibleDonorsReturnsRightListForUserBloodGroupARhFactorNegativeNoDonations()
+        public void GetEligibleDonorsReturnsRightListForUserWithBloodGroupARhFactorNegativeNoDonationsTest()
         {
-            ApplicationUser testUser = new ApplicationUser()
-            {
-                Blood = new Blood()
-                {
-                    BloodType = BloodType.A,
-                    RhFactor = RhFactor.Negative,
-                },
-                Email = $"test_userANegative@gmail.com",
-            };
+            IUsersService usersService = new UsersService.UsersService(this.repositoryMock.Object);
 
-            var repositoryMock = new Mock<IDeletableEntityRepository<ApplicationUser>>();
-
-            repositoryMock.Setup(r => r.All())
-                .Returns(this.GetTestData().AsQueryable<ApplicationUser>());
-
-            IUsersService usersService = new UsersService.UsersService(repositoryMock.Object);
-
-            IEnumerable<EligibleUserViewModel> resultUsersList = usersService.GetEligibleDonors(testUser);
+            IEnumerable<EligibleUserViewModel> resultUsersList = usersService.GetEligibleDonors(this.testUser);
 
             Assert.True(resultUsersList.Count() == 2);
         }
 
         [Fact]
-        public void GetEligibleDonorsReturnsRightListForUserBloodGroupARhFactorNegativeWithDonations()
+        public void GetEligibleDonorsReturnsRightListForUserBloodGroupARhFactorNegativeWithDonationsTest()
         {
-            ApplicationUser testUser = new ApplicationUser()
-            {
-                Blood = new Blood()
-                {
-                    BloodType = BloodType.A,
-                    RhFactor = RhFactor.Negative,
-                },
-                Email = $"test_userANegative@gmail.com",
-            };
+            this.testUsersList = this.testUsersList.ToArray();
 
-            IEnumerable<ApplicationUser> testData = this.GetTestData().ToArray();
-
-            testData.ToArray()[4].Donations.Add(new Donation()
+            this.testUsersList.ToArray()[4].Donations.Add(new Donation()
             {
                 CreatedOn = new DateTime(2020, 3, 29),
             });
 
-            testData.ToArray()[7].Donations.Add(new Donation()
+            this.testUsersList.ToArray()[7].Donations.Add(new Donation()
             {
                 CreatedOn = new DateTime(2020, 1, 10),
             });
 
-            var repositoryMock = new Mock<IDeletableEntityRepository<ApplicationUser>>();
+            this.repositoryMock.Setup(r => r.All())
+                .Returns(this.testUsersList.AsQueryable<ApplicationUser>());
 
-            repositoryMock.Setup(r => r.All())
-                .Returns(testData.AsQueryable<ApplicationUser>());
+            IUsersService usersService = new UsersService.UsersService(this.repositoryMock.Object);
 
-            IUsersService usersService = new UsersService.UsersService(repositoryMock.Object);
-
-            IEnumerable<EligibleUserViewModel> resultUsersList = usersService.GetEligibleDonors(testUser);
+            IEnumerable<EligibleUserViewModel> resultUsersList = usersService.GetEligibleDonors(this.testUser);
 
             Assert.True(resultUsersList.Count() == 1);
         }
 
         [Fact]
-        public void GetEligibleDonorsReturnsRightListForUserBloodGroupBRhFactorPositiveNoDonations()
+        public void GetEligibleDonorsReturnsRightListForUserBloodGroupBRhFactorPositiveNoDonationsTest()
         {
-            ApplicationUser testUser = new ApplicationUser()
-            {
-                Blood = new Blood()
-                {
-                    BloodType = BloodType.B,
-                    RhFactor = RhFactor.Positive,
-                },
-                Email = $"test_userANegative@gmail.com",
-            };
+            this.testUser.Blood.BloodType = BloodType.B;
+            this.testUser.Blood.RhFactor = RhFactor.Positive;
 
-            IEnumerable<ApplicationUser> testData = this.GetTestData().ToArray();
+            this.testUsersList = this.testUsersList.ToArray();
 
-            var repositoryMock = new Mock<IDeletableEntityRepository<ApplicationUser>>();
+            this.repositoryMock.Setup(r => r.All())
+                .Returns(this.testUsersList.AsQueryable<ApplicationUser>());
 
-            repositoryMock.Setup(r => r.All())
-                .Returns(testData.AsQueryable<ApplicationUser>());
+            IUsersService usersService = new UsersService.UsersService(this.repositoryMock.Object);
 
-            IUsersService usersService = new UsersService.UsersService(repositoryMock.Object);
-
-            IEnumerable<EligibleUserViewModel> resultUsersList = usersService.GetEligibleDonors(testUser);
+            IEnumerable<EligibleUserViewModel> resultUsersList = usersService.GetEligibleDonors(this.testUser);
 
             Assert.True(resultUsersList.Count() == 4);
         }
 
         [Fact]
-        public void GetEligibleDonorsReturnsRightListForUserBloodGroupBRhFactorPositiveWithDonations()
+        public void GetEligibleDonorsReturnsRightListForUserBloodGroupBRhFactorPositiveWithDonationsTest()
         {
-            ApplicationUser testUser = new ApplicationUser()
-            {
-                Blood = new Blood()
-                {
-                    BloodType = BloodType.B,
-                    RhFactor = RhFactor.Positive,
-                },
-                Email = $"test_userANegative@gmail.com",
-            };
+            this.testUser.Blood.BloodType = BloodType.B;
+            this.testUser.Blood.RhFactor = RhFactor.Positive;
 
-            IEnumerable<ApplicationUser> testData = this.GetTestData().ToArray();
+            this.testUsersList = this.testUsersList.ToArray();
 
-            testData.ToArray()[1].Donations.Add(new Donation()
+            this.testUsersList.ToArray()[1].Donations.Add(new Donation()
             {
                 CreatedOn = new DateTime(2020, 3, 29),
             });
 
-            testData.ToArray()[7].Donations.Add(new Donation()
+            this.testUsersList.ToArray()[7].Donations.Add(new Donation()
             {
                 CreatedOn = new DateTime(2020, 1, 30),
             });
 
-            var repositoryMock = new Mock<IDeletableEntityRepository<ApplicationUser>>();
+            this.repositoryMock.Setup(r => r.All())
+                .Returns(this.testUsersList.AsQueryable<ApplicationUser>());
 
-            repositoryMock.Setup(r => r.All())
-                .Returns(testData.AsQueryable<ApplicationUser>());
+            IUsersService usersService = new UsersService.UsersService(this.repositoryMock.Object);
 
-            IUsersService usersService = new UsersService.UsersService(repositoryMock.Object);
-
-            IEnumerable<EligibleUserViewModel> resultUsersList = usersService.GetEligibleDonors(testUser);
+            IEnumerable<EligibleUserViewModel> resultUsersList = usersService.GetEligibleDonors(this.testUser);
 
             Assert.True(resultUsersList.Count() == 3);
         }
 
         [Fact]
-        public void GetEligibleDonorsReturnsRightListForUserBloodNull()
+        public void GetEligibleDonorsReturnsRightListForUserBloodNullTest()
         {
-            ApplicationUser testUser = new ApplicationUser()
-            {
-                Blood = null,
-                Email = $"test_userANegative@gmail.com",
-            };
+            this.testUser.Blood = null;
 
-            IEnumerable<ApplicationUser> testData = this.GetTestData().ToArray();
+            this.testUsersList = this.testUsersList.ToArray();
 
-            testData.ToArray()[1].Donations.Add(new Donation()
+            this.testUsersList.ToArray()[1].Donations.Add(new Donation()
             {
                 CreatedOn = new DateTime(2020, 3, 29),
             });
 
-            testData.ToArray()[7].Donations.Add(new Donation()
+            this.testUsersList.ToArray()[7].Donations.Add(new Donation()
             {
                 CreatedOn = new DateTime(2020, 1, 30),
             });
 
-            var repositoryMock = new Mock<IDeletableEntityRepository<ApplicationUser>>();
+            this.repositoryMock.Setup(r => r.All())
+                .Returns(this.testUsersList.AsQueryable<ApplicationUser>());
 
-            repositoryMock.Setup(r => r.All())
-                .Returns(testData.AsQueryable<ApplicationUser>());
+            IUsersService usersService = new UsersService.UsersService(this.repositoryMock.Object);
 
-            IUsersService usersService = new UsersService.UsersService(repositoryMock.Object);
-
-            IEnumerable<EligibleUserViewModel> resultUsersList = usersService.GetEligibleDonors(testUser);
+            IEnumerable<EligibleUserViewModel> resultUsersList = usersService.GetEligibleDonors(this.testUser);
 
             Assert.True(resultUsersList.Count() == 0);
         }
 
         [Fact]
-        public void GetEligibleDonorsReturnsRightListForUserBloodGroupBRhFactorPositiveWithNullBloodTypes()
+        public void GetEligibleDonorsReturnsRightListForUserBloodGroupBRhFactorPositiveWithNullBloodTypesTest()
         {
-            ApplicationUser testUser = new ApplicationUser()
-            {
-                Blood = new Blood()
-                {
-                    BloodType = BloodType.B,
-                    RhFactor = RhFactor.Positive,
-                },
-                Email = $"test_userANegative@gmail.com",
-            };
+            this.testUser.Blood.BloodType = BloodType.B;
+            this.testUser.Blood.RhFactor = RhFactor.Positive;
 
-            IEnumerable<ApplicationUser> testData = this.GetTestData().ToArray();
+            this.testUsersList = this.testUsersList.ToArray();
 
-            testData.ToArray()[1].Blood = null;
+            this.testUsersList.ToArray()[1].Blood = null;
 
-            testData.ToArray()[7].Donations.Add(new Donation()
+            this.testUsersList.ToArray()[7].Donations.Add(new Donation()
             {
                 CreatedOn = new DateTime(2020, 1, 30),
             });
 
-            var repositoryMock = new Mock<IDeletableEntityRepository<ApplicationUser>>();
+            this.repositoryMock.Setup(r => r.All())
+                .Returns(this.testUsersList.AsQueryable<ApplicationUser>());
 
-            repositoryMock.Setup(r => r.All())
-                .Returns(testData.AsQueryable<ApplicationUser>());
+            IUsersService usersService = new UsersService.UsersService(this.repositoryMock.Object);
 
-            IUsersService usersService = new UsersService.UsersService(repositoryMock.Object);
+            IEnumerable<EligibleUserViewModel> resultUsersList = usersService.GetEligibleDonors(this.testUser);
 
-            IEnumerable<EligibleUserViewModel> resultUsersList = usersService.GetEligibleDonors(testUser);
-
-            Assert.True(resultUsersList.Count() == 2);
+            Assert.True(resultUsersList.Count() == 3);
         }
 
         [Fact]
         public void GetEligibleDonorsReturnsRightListForUserBloodGroupBRhFactorPositiveTestUserInList()
         {
-            ApplicationUser testUser = new ApplicationUser()
-            {
-                Blood = new Blood()
-                {
-                    BloodType = BloodType.B,
-                    RhFactor = RhFactor.Positive,
-                },
-                Email = $"test_userANegative@gmail.com",
-            };
+            this.testUser.Blood.BloodType = BloodType.B;
+            this.testUser.Blood.RhFactor = RhFactor.Positive;
 
-            IEnumerable<ApplicationUser> testData = this.GetTestData().ToList();
+            this.testUsersList = this.testUsersList.ToArray();
 
-            List<ApplicationUser> applicationUsers = new List<ApplicationUser>(testData);
-            applicationUsers.Add(testUser);
+            List<ApplicationUser> applicationUsers = new List<ApplicationUser>(this.testUsersList);
+            applicationUsers.Add(this.testUser);
 
-            testData = applicationUsers.AsEnumerable<ApplicationUser>();
+            this.testUsersList = applicationUsers.AsEnumerable<ApplicationUser>();
 
-            var repositoryMock = new Mock<IDeletableEntityRepository<ApplicationUser>>();
+            this.repositoryMock.Setup(r => r.All())
+                .Returns(this.testUsersList.AsQueryable<ApplicationUser>());
 
-            repositoryMock.Setup(r => r.All())
-                .Returns(testData.AsQueryable<ApplicationUser>());
+            IUsersService usersService = new UsersService.UsersService(this.repositoryMock.Object);
 
-            IUsersService usersService = new UsersService.UsersService(repositoryMock.Object);
-
-            IEnumerable<EligibleUserViewModel> resultUsersList = usersService.GetEligibleDonors(testUser);
+            IEnumerable<EligibleUserViewModel> resultUsersList = usersService.GetEligibleDonors(this.testUser);
 
             Assert.True(resultUsersList.Count() == 4);
         }

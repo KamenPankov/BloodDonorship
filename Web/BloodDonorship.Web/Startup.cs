@@ -1,5 +1,7 @@
-﻿using System.Reflection;
-
+﻿using System;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 using BloodDonorship.Data;
 using BloodDonorship.Data.Common;
 using BloodDonorship.Data.Common.Repositories;
@@ -19,6 +21,7 @@ using BloodDonorship.Web.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -42,8 +45,10 @@ namespace BloodDonorship.Web
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseLazyLoadingProxies().UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
+            services
+                .AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddAuthentication()
                 .AddFacebook(facebookOptions =>
                 {
