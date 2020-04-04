@@ -62,7 +62,8 @@
             string confirmDelete = string.Concat("confirmDelete", donation.Id);
             <tr>
                 <td>
-                    @donation.CreatedOn.ToString(GlobalConstants.DateFormat, CultureInfo.InvariantCulture)
+                    <time datetime="@donation.CreatedOn.ToString("O")"></time>
+                    
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => donation.Beneficient)

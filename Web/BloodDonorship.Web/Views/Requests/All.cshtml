@@ -33,7 +33,8 @@
 
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => request.CreatedOn)
+                        <time datetime="@request.CreatedOn.ToString("O")"></time>
+                        
                     </td>
                     <td>
                         @if (request.NotifiedUsersCount == 1)

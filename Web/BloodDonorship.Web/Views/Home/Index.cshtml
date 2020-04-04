@@ -58,7 +58,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Request from: @request.UserUserName</h5>
                         <p class="card-text">Blood Type: @string.Concat(request.UserBloodBloodType, " ", request.UserBloodRhFactor)</p>
-                        <p class="card-text">Created on: @request.CreatedOn</p>
+                        <p class="card-text">Created on: <time datetime="@request.CreatedOn.ToString("O")"></time></p>
                         <p class="card-text">Donations: @request.DonationsCount</p>
                         <a href="Donations/Create?requestId=@request.Id&userId=@request.UserId" class="btn btn-primary">Donate</a>
                     </div>

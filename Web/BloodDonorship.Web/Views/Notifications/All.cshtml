@@ -21,7 +21,7 @@
         </div>
         <div class="card-body">
             <h5 class="card-title">From: @notification.SenderUserName</h5>
-            <p class="card-text">@notification.CreatedOn</p>
+            <p class="card-text"><time datetime="@notification.CreatedOn.ToString("O")"></time></p>
             <p class="card-text">@notification.Content</p>
             <div class="card-text text-right">
 

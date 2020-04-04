@@ -1,7 +1,6 @@
-﻿using System.Globalization;
+﻿using System;
 
 using AutoMapper;
-using BloodDonorship.Common;
 using BloodDonorship.Data.Models;
 using BloodDonorship.Services.Mapping;
 
@@ -19,7 +18,7 @@ namespace BloodDonorship.Web.ViewModels.Home
 
         public string UserBloodRhFactor { get; set; }
 
-        public string CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
         public int DonationsCount { get; set; }
 
@@ -35,9 +34,6 @@ namespace BloodDonorship.Web.ViewModels.Home
 
             configuration.CreateMap<BloodDonorship.Data.Models.Request, AllRequestViewModel>()
                 .ForMember(d => d.UserUserName, o => o.MapFrom(s => s.User.UserName));
-
-            configuration.CreateMap<BloodDonorship.Data.Models.Request, AllRequestViewModel>()
-                .ForMember(c => c.CreatedOn, o => o.MapFrom(s => s.CreatedOn.ToString(GlobalConstants.DateFormat, CultureInfo.InvariantCulture)));
         }
     }
 }
