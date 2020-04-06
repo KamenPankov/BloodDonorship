@@ -53,6 +53,11 @@ namespace BloodDonorship.Services.Data.RequestsService
 
         public IEnumerable<T> AllByEmail<T>(string email, int? count = null)
         {
+            if (string.IsNullOrEmpty(email))
+            {
+                return this.All<T>(1);
+            }
+
             IQueryable<Request> query = this.requestsRepository.All()
                 .Where(r => r.User.Email.Contains(email))
                 .OrderByDescending(r => r.CreatedOn);
