@@ -88,8 +88,11 @@ namespace BloodDonorship.Services.Data.DonationsService
         {
             Donation donation = this.entityRepository.All().FirstOrDefault(d => d.Id == donationId);
 
-            this.entityRepository.Delete(donation);
-            await this.entityRepository.SaveChangesAsync();
+            if (donation != null)
+            {
+                this.entityRepository.Delete(donation);
+                await this.entityRepository.SaveChangesAsync();
+            }
         }
     }
 }
