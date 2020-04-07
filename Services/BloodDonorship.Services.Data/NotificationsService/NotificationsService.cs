@@ -22,6 +22,14 @@ namespace BloodDonorship.Services.Data.NotificationsService
 
         public async Task AddAsync(NotificationInputModel inputModel)
         {
+            bool isNotificationType =
+                Enum.TryParse<NotificationType>(inputModel.NotificationType, out NotificationType result);
+
+            if (!isNotificationType)
+            {
+                return;
+            }
+
             Notification notification = new Notification()
             {
                 SenderId = inputModel.SenderId,
@@ -54,7 +62,7 @@ namespace BloodDonorship.Services.Data.NotificationsService
             Notification notification = this.entityRepository.All()
                 .FirstOrDefault(n => n.Id == notificationId);
 
-            if (notificationId != null)
+            if (notification != null)
             {
                 this.entityRepository.Delete(notification);
                 await this.entityRepository.SaveChangesAsync();
