@@ -43,7 +43,6 @@ namespace BloodDonorship.Services.Data.BloodsService
             return bloodTypes;
         }
 
-
         public IEnumerable<SelectListItem> RhFactors()
         {
             List<SelectListItem> rhFactors = new List<SelectListItem>();
