@@ -32,6 +32,7 @@ namespace BloodDonorship.Services.Data.NotificationsService
 
             Notification notification = new Notification()
             {
+                AnonymousEmail = inputModel.AnonymousEmail,
                 SenderId = inputModel.SenderId,
                 RecipientId = inputModel.RecipientId,
                 RequestId = inputModel.RequestId,

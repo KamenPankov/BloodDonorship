@@ -1,0 +1,55 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using BloodDonorship.Data.Models
+@using BloodDonorship.Web.ViewModels.Contacts
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+
+@model CreateContactInputModel
+
+@{
+    ViewData["Title"] = "Contact";
+}
+
+@if (this.TempData["InfoMessage"] != null)
+{
+    <div class="alert alert-success">
+        @this.TempData["InfoMessage"]
+    </div>
+}
+
+<h2>Contact as</h2>
+<hr />
+
+
+<form asp-controller="Contact" asp-action="Create" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <div class="form-group">
+            <label asp-for="UserEmail" class="form-control"></label>
+
+            @if (SignInManager.IsSignedIn(this.User))
+            {
+                <input asp-for="UserEmail" type="email" class="form-control" value="@Model.UserEmail" />
+            }
+            else
+            {
+                <input asp-for="UserEmail" type="email" class="form-control" placeholder="Email..." />
+            }
+            <span asp-validation-for="UserEmail" class="text-danger"></span>
+        </div>
+
+
+        <textarea asp-for="Content" type="text" class="form-control" id="exampleFormControlTextarea1" rows="10" placeholder="Type your message..."></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">Cancel</a>
+        <button type="submit" asp-action="Create" class="btn btn-primary">Send</button>
+    </div>
+
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

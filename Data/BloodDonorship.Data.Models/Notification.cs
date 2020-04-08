@@ -15,6 +15,8 @@ namespace BloodDonorship.Data.Models
             this.Id = Guid.NewGuid().ToString();
         }
 
+        public string AnonymousEmail { get; set; }
+
         public string SenderId { get; set; }
 
         public virtual ApplicationUser Sender { get; set; }

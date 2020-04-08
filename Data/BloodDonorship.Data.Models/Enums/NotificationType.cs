@@ -4,5 +4,6 @@
     {
         Request = 0,
         Donation = 1,
+        Administrator = 2,
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 using BloodDonorship.Data.Common.Repositories;
 using BloodDonorship.Data.Models;
@@ -16,6 +17,19 @@ namespace BloodDonorship.Services.Data.UsersService
         public UsersService(IDeletableEntityRepository<ApplicationUser> entityRepository)
         {
             this.entityRepository = entityRepository;
+        }
+
+        public async Task<string> AddAnonymousUser(string email)
+        {
+            ApplicationUser anonymous = new ApplicationUser()
+            {
+                Email = email,
+            };
+
+            await this.entityRepository.AddAsync(anonymous);
+            await this.entityRepository.SaveChangesAsync();
+
+            return anonymous.Id;
         }
 
         public string GetUserIdByEmail(string email)

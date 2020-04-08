@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using BloodDonorship.Data.Models;
 using BloodDonorship.Data.Models.Enums;
@@ -8,6 +9,8 @@ namespace BloodDonorship.Services.Data.UsersService
 {
     public interface IUsersService
     {
+        Task<string> AddAnonymousUser(string email);
+
         string GetUserIdByEmail(string email);
 
         IEnumerable<EligibleUserViewModel> GetEligibleDonors(ApplicationUser user);
