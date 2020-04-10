@@ -1,7 +1,12 @@
-﻿using System;
+﻿using System.Linq;
+using System.Threading.Tasks;
+
 using BloodDonorship.Data.Models;
 using BloodDonorship.Services.Data.NotificationsService;
+using BloodDonorship.Services.Data.UsersService;
+using BloodDonorship.Services.Messaging;
 using BloodDonorship.Web.ViewModels.Administration.Notifications;
+using BloodDonorship.Web.ViewModels.Notifications;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,13 +15,19 @@ namespace BloodDonorship.Web.Areas.Administration.Controllers
     public class NotificationsController : AdministrationController
     {
         private readonly INotificationsService notificationsService;
+        private readonly IUsersService usersService;
+        private readonly IEmailSender emailSender;
         private readonly UserManager<ApplicationUser> userManager;
 
         public NotificationsController(
             INotificationsService notificationsService,
+            IUsersService usersService,
+            IEmailSender emailSender,
             UserManager<ApplicationUser> userManager)
         {
             this.notificationsService = notificationsService;
+            this.usersService = usersService;
+            this.emailSender = emailSender;
             this.userManager = userManager;
         }
 
@@ -45,11 +56,35 @@ namespace BloodDonorship.Web.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public IActionResult Answer(AnswerViewModel viewModel)
+        public async Task<IActionResult> Answer(AnswerViewModel viewModel)
         {
-            // TODO: create notification
+            ApplicationUser userAdmin = this.userManager.GetUsersInRoleAsync("Administrator").Result.FirstOrDefault();
 
-            // TODO: sned email
+            NotificationInputModel inputNotification = new NotificationInputModel()
+            {
+                SenderId = userAdmin.Id,
+                RecipientId = this.usersService.GetUserIdByEmail(viewModel.Email),
+                NotificationType = "Administrator",
+                Content = viewModel.Content,
+            };
+
+            await this.notificationsService.AddAsync(inputNotification);
+
+            string from = userAdmin.Email;
+            string to = viewModel.Email;
+            string subject = "Answer from BloodDonorship";
+            string content = viewModel.Content;
+
+            await this.emailSender.SendEmailAsync(from, from, to, subject, content);
+
+            this.TempData["InfoMessage"] = $"Message to {viewModel.Email} has been sent successfully.";
+
+            return this.RedirectToAction("AllToAdmin");
+        }
+
+        public async Task<IActionResult> Delete(string notificationId)
+        {
+            await this.notificationsService.Delete(notificationId);
 
             return this.RedirectToAction("AllToAdmin");
         }

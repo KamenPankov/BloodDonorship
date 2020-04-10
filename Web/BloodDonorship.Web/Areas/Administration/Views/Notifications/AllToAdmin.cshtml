@@ -1,5 +1,12 @@
 ﻿@model BloodDonorship.Web.ViewModels.Administration.Notifications.AllNotificationsAdminViewModel
 
+@if (this.TempData["InfoMessage"] != null)
+{
+    <div class="alert alert-success">
+        @this.TempData["InfoMessage"]
+    </div>
+}
+
 @{
     ViewData["Title"] = "Notifications";
 }
@@ -45,7 +52,7 @@
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                    Are you sure you want to delete the message from <span class="text text-primary">@notification.SenderUserName</span>?
+                                    Are you sure you want to delete the message from <span class="text text-primary">@(string.IsNullOrEmpty(notification.SenderUserName) ? notification.AnonymousEmail : notification.SenderUserName)</span>?
                                 </div>
 
                                 <!-- Modal footer -->
