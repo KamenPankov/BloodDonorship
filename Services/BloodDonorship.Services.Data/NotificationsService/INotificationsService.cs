@@ -12,5 +12,7 @@ namespace BloodDonorship.Services.Data.NotificationsService
         IEnumerable<T> AllByUser<T>(string userId, int? count = null);
 
         Task Delete(string notificationId);
+
+        IEnumerable<T> AllToAdmin<T>();
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BloodDonorship.Data.Common.Repositories;
 using BloodDonorship.Data.Models;
 using BloodDonorship.Data.Models.Enums;
+using BloodDonorship.Services.Mapping;
 using BloodDonorship.Web.ViewModels.Users;
 
 namespace BloodDonorship.Services.Data.UsersService
@@ -37,6 +38,44 @@ namespace BloodDonorship.Services.Data.UsersService
             return this.entityRepository.All()
                 .Where(u => u.Email == email)
                 .Select(u => u.Id)
+                .FirstOrDefault();
+        }
+
+        public IEnumerable<T> GetAllUsers<T>()
+        {
+            return this.entityRepository.All()
+                .Where(u => !string.IsNullOrEmpty(u.UserName))
+                .OrderByDescending(u => u.CreatedOn)
+                .To<T>()
+                .ToArray();
+        }
+
+        public int AvailableDonors()
+        {
+            return this.entityRepository.All().AsEnumerable()
+                .Where(u => u.Blood != null && u.Blood.BloodType != 0 && u.Blood.RhFactor != 0 &&
+                            (DateTime.UtcNow - u.Donations
+                                                .OrderByDescending(d => d.CreatedOn)
+                                                .Select(d => d.CreatedOn)
+                                                .FirstOrDefault()).TotalDays >= 60)
+                .Count();
+        }
+
+        public string MostWantedBloodType()
+        {
+            return this.entityRepository.All()
+                .Where(u => u.Blood != null && u.Blood.BloodType != 0 && u.Blood.RhFactor != 0)
+                .OrderByDescending(u => u.Requests.Count())
+                .Select(u => string.Concat(u.Blood.BloodType.ToString(), " ", u.Blood.RhFactor.ToString()))
+                .FirstOrDefault();
+        }
+
+        public string MostDonatedBloodType()
+        {
+            return this.entityRepository.All()
+                .Where(u => u.Blood != null && u.Blood.BloodType != 0 && u.Blood.RhFactor != 0)
+                .OrderByDescending(u => u.Donations.Count())
+                .Select(u => string.Concat(u.Blood.BloodType.ToString(), " ", u.Blood.RhFactor.ToString()))
                 .FirstOrDefault();
         }
 

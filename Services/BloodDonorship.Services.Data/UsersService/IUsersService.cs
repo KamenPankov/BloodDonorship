@@ -11,10 +11,18 @@ namespace BloodDonorship.Services.Data.UsersService
     {
         Task<string> AddAnonymousUser(string email);
 
+        IEnumerable<T> GetAllUsers<T>();
+
         string GetUserIdByEmail(string email);
 
         IEnumerable<EligibleUserViewModel> GetEligibleDonors(ApplicationUser user);
 
         IEnumerable<(string BloodGroup, string RhFactor)> CompatableBloodTypes(BloodType bloodType, RhFactor rhFactor);
+
+        string MostWantedBloodType();
+
+        string MostDonatedBloodType();
+
+        int AvailableDonors();
     }
 }

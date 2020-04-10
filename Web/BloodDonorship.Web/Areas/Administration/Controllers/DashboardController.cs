@@ -1,5 +1,6 @@
 ﻿using BloodDonorship.Services.Data;
 using BloodDonorship.Services.Data.BloodsService;
+using BloodDonorship.Services.Data.UsersService;
 using BloodDonorship.Web.Areas.Identity.Pages.Account.Manage;
 using BloodDonorship.Web.ViewModels.Administration.Dashboard;
 
@@ -10,15 +11,27 @@ namespace BloodDonorship.Web.Areas.Administration.Controllers
     public class DashboardController : AdministrationController
     {
         private readonly ISettingsService settingsService;
+        private readonly IUsersService usersService;
 
-        public DashboardController(ISettingsService settingsService)
+        public DashboardController(
+            ISettingsService settingsService,
+            IUsersService usersService)
         {
-            this.settingsService = settingsService;            
+            this.settingsService = settingsService;
+            this.usersService = usersService;
         }
 
         public IActionResult Index()
         {
-            var viewModel = new IndexViewModel { SettingsCount = this.settingsService.GetCount(), };
+            IndexViewModel viewModel = new IndexViewModel()
+            {
+                Users = this.usersService.GetAllUsers<UserViewModel>(),
+            };
+
+            viewModel.MostWantedBloodType = this.usersService.MostWantedBloodType();
+            viewModel.MostDonatedBloodType = this.usersService.MostDonatedBloodType();
+            viewModel.AvailableDonors = this.usersService.AvailableDonors();
+
             return this.View(viewModel);
         }
     }

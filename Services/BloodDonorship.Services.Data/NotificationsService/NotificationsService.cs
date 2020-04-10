@@ -69,5 +69,14 @@ namespace BloodDonorship.Services.Data.NotificationsService
                 await this.entityRepository.SaveChangesAsync();
             }
         }
+
+        public IEnumerable<T> AllToAdmin<T>()
+        {
+            return this.entityRepository.All()
+                .Where(n => (int)n.NotificationType == 2)
+                .OrderByDescending(n => n.CreatedOn)
+                .To<T>()
+                .ToArray();
+        }
     }
 }

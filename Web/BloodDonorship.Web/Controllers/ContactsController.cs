@@ -65,7 +65,9 @@ namespace BloodDonorship.Web.Controllers
             ApplicationUser userAdmin = this.userManager.GetUsersInRoleAsync("Administrator").Result.FirstOrDefault();
             string senderId = string.Empty;
 
-            if (this.signInManager.IsSignedIn(this.User))
+            bool isSignedIn = this.signInManager.IsSignedIn(this.User);
+
+            if (isSignedIn)
             {
                 senderId = this.userManager.GetUserId(this.User);
             }
@@ -76,7 +78,7 @@ namespace BloodDonorship.Web.Controllers
 
             NotificationInputModel inputNotification = new NotificationInputModel()
             {
-                AnonymousEmail = string.IsNullOrEmpty(senderId) ? inputModel.UserEmail : string.Empty,
+                AnonymousEmail = isSignedIn ? string.Empty : inputModel.UserEmail,
                 SenderId = senderId,
                 RecipientId = userAdmin.Id,
                 NotificationType = "Administrator",
@@ -87,7 +89,7 @@ namespace BloodDonorship.Web.Controllers
 
             string from = inputModel.UserEmail;
             string to = userAdmin.Email;
-            string subject = string.IsNullOrEmpty(senderId) ?
+            string subject = !isSignedIn ?
                 $"Anonymous from: {inputModel.UserEmail}" :
                 inputModel.UserEmail;
             string content = inputModel.Content;
