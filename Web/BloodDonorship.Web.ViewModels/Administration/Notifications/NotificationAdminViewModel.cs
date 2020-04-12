@@ -11,10 +11,8 @@ namespace BloodDonorship.Web.ViewModels.Administration.Notifications
     {
         public string Id { get; set; }
 
-        [Display(Name = "Received On")]
         public DateTime CreatedOn { get; set; }
 
-        [Display(Name = "From")]
         public string SenderUserName { get; set; }
 
         public string AnonymousEmail { get; set; }
@@ -27,7 +25,9 @@ namespace BloodDonorship.Web.ViewModels.Administration.Notifications
         {
             configuration.CreateMap<Notification, NotificationAdminViewModel>()
                 .ForMember(d => d.NotificationType, options =>
-                options.MapFrom(s => s.NotificationType.ToString()));
+                options.MapFrom(s => s.NotificationType.ToString()))
+                .ForMember(d => d.SenderUserName, options =>
+                options.MapFrom(s => s.Sender.UserName));
         }
     }
 }

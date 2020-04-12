@@ -46,6 +46,7 @@ namespace BloodDonorship.Web.Controllers
                 CreateContactInputModel inputModel = new CreateContactInputModel()
                 {
                     UserEmail = user.Email,
+                    UserName = user.UserName,
                 };
 
                 return this.View(inputModel);
@@ -88,13 +89,14 @@ namespace BloodDonorship.Web.Controllers
             await this.notificationsService.AddAsync(inputNotification);
 
             string from = inputModel.UserEmail;
+            string fromName = isSignedIn ? inputModel.UserName : "Unregistered";
             string to = userAdmin.Email;
             string subject = !isSignedIn ?
-                $"Anonymous from: {inputModel.UserEmail}" :
-                inputModel.UserEmail;
+                $"Message from: {inputModel.UserEmail}" :
+                inputModel.UserName;
             string content = inputModel.Content;
 
-            await this.emailSender.SendEmailAsync(from, from, to, subject, content);
+            await this.emailSender.SendEmailAsync(from, fromName, to, subject, content);
 
             this.TempData["InfoMessage"] = "Message has been sent successfully.";
 

@@ -7,10 +7,14 @@ namespace BloodDonorship.Web.ViewModels.Contacts
 {
     public class CreateContactInputModel
     {
-        [Display(Name = "From:")]
         [Required]
+        [Display(Name = "From:")]
         [EmailAddress(ErrorMessage = "Invalid email address.")]
         public string UserEmail { get; set; }
+
+        [Required]
+        [Display(Name = "From:")]
+        public string UserName { get; set; }
 
         [Required]
         [MinLength(10, ErrorMessage = "Message must contains at least 10 characters.")]

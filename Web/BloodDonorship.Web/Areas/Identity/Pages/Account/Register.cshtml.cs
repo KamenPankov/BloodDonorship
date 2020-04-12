@@ -56,6 +56,11 @@ namespace BloodDonorship.Web.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
+            [RegularExpression("^[A-Z][a-z]{2,19}$", ErrorMessage = "Username must consist only of letters, must start with an uppercase letter and be at least three characters long.")]
+            [Display(Name = "Username")]
+            public string UserName { get; set; }
+
+            [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
@@ -79,7 +84,7 @@ namespace BloodDonorship.Web.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser { Email = Input.Email, UserName = Input.UserName,  };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)

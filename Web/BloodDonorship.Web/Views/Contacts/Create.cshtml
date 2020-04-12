@@ -26,17 +26,25 @@
 
     <div class="form-group">
         <div class="form-group">
-            <label asp-for="UserEmail" class="form-control"></label>
+
 
             @if (SignInManager.IsSignedIn(this.User))
             {
-                <input asp-for="UserEmail" type="email" class="form-control" value="@Model.UserEmail" />
+                <label asp-for="UserName" class="form-control"></label>
+                <input asp-for="UserName" type="text" class="form-control" value="@Model.UserName" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+
+                <input asp-for="UserEmail" type="email" hidden class="form-control" value="@Model.UserEmail" />
             }
             else
             {
+                <label asp-for="UserEmail" class="form-control"></label>
                 <input asp-for="UserEmail" type="email" class="form-control" placeholder="Email..." />
+                <span asp-validation-for="UserEmail" class="text-danger"></span>
+
+                <input asp-for="UserName" type="text" hidden class="form-control" value="Unregistered" />
             }
-            <span asp-validation-for="UserEmail" class="text-danger"></span>
+
         </div>
 
 

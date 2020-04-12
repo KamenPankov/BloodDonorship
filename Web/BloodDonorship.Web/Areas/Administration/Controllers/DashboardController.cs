@@ -25,7 +25,7 @@ namespace BloodDonorship.Web.Areas.Administration.Controllers
         {
             IndexViewModel viewModel = new IndexViewModel()
             {
-                Users = this.usersService.GetAllUsers<UserViewModel>(),
+                Users = this.usersService.GetAllUsers<UserViewModel>(), // TODO: get all with deleted
             };
 
             viewModel.MostWantedBloodType = this.usersService.MostWantedBloodType();

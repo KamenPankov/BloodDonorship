@@ -34,11 +34,9 @@ namespace BloodDonorship.Web.Areas.Administration.Controllers
         [HttpGet]
         public IActionResult AllToAdmin()
         {
-            string adminId = this.userManager.GetUserId(this.User);
-
             AllNotificationsAdminViewModel viewModel = new AllNotificationsAdminViewModel()
             {
-                Notifications = this.notificationsService.AllByUser<NotificationAdminViewModel>(adminId),
+                Notifications = this.notificationsService.AllToAdmin<NotificationAdminViewModel>(),
             };
 
             return this.View(viewModel);
@@ -71,11 +69,12 @@ namespace BloodDonorship.Web.Areas.Administration.Controllers
             await this.notificationsService.AddAsync(inputNotification);
 
             string from = userAdmin.Email;
+            string fromName = userAdmin.UserName;
             string to = viewModel.Email;
             string subject = "Answer from BloodDonorship";
             string content = viewModel.Content;
 
-            await this.emailSender.SendEmailAsync(from, from, to, subject, content);
+            await this.emailSender.SendEmailAsync(from, fromName, to, subject, content);
 
             this.TempData["InfoMessage"] = $"Message to {viewModel.Email} has been sent successfully.";
 
