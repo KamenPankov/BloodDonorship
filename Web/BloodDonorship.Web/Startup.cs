@@ -117,6 +117,8 @@ namespace BloodDonorship.Web
             }
             else
             {
+                //app.UseDeveloperExceptionPage();
+                //app.UseDatabaseErrorPage();
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }

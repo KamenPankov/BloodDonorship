@@ -56,12 +56,28 @@ namespace BloodDonorship.Web.Areas.Administration.Controllers
         [HttpPost]
         public async Task<IActionResult> Answer(AnswerViewModel viewModel)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction("Answer", viewModel.Email);
+            }
+
+            string recipientId = this.usersService.GetUserIdByEmail(viewModel.Email);
+
+            if (string.IsNullOrEmpty(recipientId))
+            {
+                ApplicationUser recipient = await this.userManager.FindByNameAsync(viewModel.Email);
+
+                recipientId = recipient.Id;
+
+                viewModel.Email = recipient.Email;
+            }
+
             ApplicationUser userAdmin = this.userManager.GetUsersInRoleAsync("Administrator").Result.FirstOrDefault();
 
             NotificationInputModel inputNotification = new NotificationInputModel()
             {
                 SenderId = userAdmin.Id,
-                RecipientId = this.usersService.GetUserIdByEmail(viewModel.Email),
+                RecipientId = recipientId,
                 NotificationType = "Administrator",
                 Content = viewModel.Content,
             };

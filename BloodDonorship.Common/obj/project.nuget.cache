@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "PTXPsGCL2ZVd30AFgzOL9/bHppD46rE35kkzfSO4WACR15JBAmazD+bQQqGOpG/4IJ/z+CPtdCSDkZraMs7aOQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\BloodDonorship.Common\\BloodDonorship.Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\Kamen\\.nuget\\packages\\stylecop.analyzers\\1.2.0-beta.164\\stylecop.analyzers.1.2.0-beta.164.nupkg.sha512",
+    "C:\\Users\\Kamen\\.nuget\\packages\\stylecop.analyzers.unstable\\1.2.0.164\\stylecop.analyzers.unstable.1.2.0.164.nupkg.sha512"
+  ],
+  "logs": []
+}
