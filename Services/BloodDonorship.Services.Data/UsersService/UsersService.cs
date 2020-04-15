@@ -50,6 +50,15 @@ namespace BloodDonorship.Services.Data.UsersService
                 .ToArray();
         }
 
+        public IEnumerable<T> GetAllUsersDeleted<T>()
+        {
+            return this.entityRepository.AllWithDeleted()
+                .Where(u => !string.IsNullOrEmpty(u.UserName) && u.IsDeleted == true)
+                .OrderByDescending(u => u.DeletedOn)
+                .To<T>()
+                .ToArray();
+        }
+
         public int AvailableDonors()
         {
             return this.entityRepository.All().AsEnumerable()
@@ -77,6 +86,26 @@ namespace BloodDonorship.Services.Data.UsersService
                 .OrderByDescending(u => u.Donations.Count())
                 .Select(u => string.Concat(u.Blood.BloodType.ToString(), " ", u.Blood.RhFactor.ToString()))
                 .FirstOrDefault();
+        }
+
+        public async Task DeleteUser(string userId)
+        {
+            ApplicationUser user = this.entityRepository.All()
+                .Where(u => u.Id == userId)
+                .FirstOrDefault();
+
+            this.entityRepository.Delete(user);
+            await this.entityRepository.SaveChangesAsync();
+        }
+
+        public async Task UndeleteUser(string userId)
+        {
+            ApplicationUser user = this.entityRepository.AllWithDeleted()
+                .Where(u => u.Id == userId)
+                .FirstOrDefault();
+
+            this.entityRepository.Undelete(user);
+            await this.entityRepository.SaveChangesAsync();
         }
 
         public IEnumerable<EligibleUserViewModel> GetEligibleDonors(ApplicationUser user)

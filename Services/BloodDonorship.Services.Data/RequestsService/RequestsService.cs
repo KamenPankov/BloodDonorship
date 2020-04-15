@@ -41,6 +41,7 @@ namespace BloodDonorship.Services.Data.RequestsService
             }
 
             IQueryable<Request> query = this.requestsRepository.All()
+                .Where(r => r.User.IsDeleted == false)
                 .OrderByDescending(r => r.CreatedOn);
 
             if (count.HasValue)
@@ -59,7 +60,7 @@ namespace BloodDonorship.Services.Data.RequestsService
             }
 
             IQueryable<Request> query = this.requestsRepository.All()
-                .Where(r => r.User.Email.Contains(email))
+                .Where(r => r.User.Email.Contains(email) && r.User.IsDeleted == false)
                 .OrderByDescending(r => r.CreatedOn);
 
             if (count.HasValue)
@@ -106,7 +107,9 @@ namespace BloodDonorship.Services.Data.RequestsService
 
         public int RequestsCount()
         {
-            return this.requestsRepository.All().Count();
+            return this.requestsRepository.All()
+                .Where(r => r.User.IsDeleted == false)
+                .Count();
         }
     }
 }

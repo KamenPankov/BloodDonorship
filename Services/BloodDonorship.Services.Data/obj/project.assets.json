@@ -5032,7 +5032,7 @@
       ]
     },
     "System.Numerics.Vectors/4.4.0": {
-      "sha512": "UiLzLW+Lw6HLed1Hcg+8jSRttrbuXv7DANVj0DkL9g6EnnzbL75EB7EWsw5uRbhxd/4YdG8li5XizGWepmG3PQ==",
+      "sha512": "gdRrUJs1RrjW3JB5p82hYjA67xoeFLvh0SdSIWjTiN8qExlbFt/RtXwVYNc5BukJ/f9OKzQQS6gakzbJeHTqHg==",
       "type": "package",
       "path": "system.numerics.vectors/4.4.0",
       "files": [
@@ -7036,23 +7036,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Kamen\\.nuget\\packages\\": {},
+    "C:\\Users\\KAMEN\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Services\\BloodDonorship.Services.Data\\BloodDonorship.Services.Data.csproj",
+      "projectUniqueName": "C:\\Users\\KAMEN\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Services\\BloodDonorship.Services.Data\\BloodDonorship.Services.Data.csproj",
       "projectName": "BloodDonorship.Services.Data",
-      "projectPath": "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Services\\BloodDonorship.Services.Data\\BloodDonorship.Services.Data.csproj",
-      "packagesPath": "C:\\Users\\Kamen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Services\\BloodDonorship.Services.Data\\obj\\",
+      "projectPath": "C:\\Users\\KAMEN\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Services\\BloodDonorship.Services.Data\\BloodDonorship.Services.Data.csproj",
+      "packagesPath": "C:\\Users\\KAMEN\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\KAMEN\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Services\\BloodDonorship.Services.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Kamen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\KAMEN\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7065,20 +7065,20 @@
       "frameworks": {
         "netstandard2.1": {
           "projectReferences": {
-            "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\BloodDonorship.Common\\BloodDonorship.Common.csproj": {
-              "projectPath": "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\BloodDonorship.Common\\BloodDonorship.Common.csproj"
+            "C:\\Users\\KAMEN\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\BloodDonorship.Common\\BloodDonorship.Common.csproj": {
+              "projectPath": "C:\\Users\\KAMEN\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\BloodDonorship.Common\\BloodDonorship.Common.csproj"
             },
-            "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Data\\BloodDonorship.Data.Common\\BloodDonorship.Data.Common.csproj": {
-              "projectPath": "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Data\\BloodDonorship.Data.Common\\BloodDonorship.Data.Common.csproj"
+            "C:\\Users\\KAMEN\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Data\\BloodDonorship.Data.Common\\BloodDonorship.Data.Common.csproj": {
+              "projectPath": "C:\\Users\\KAMEN\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Data\\BloodDonorship.Data.Common\\BloodDonorship.Data.Common.csproj"
             },
-            "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Data\\BloodDonorship.Data.Models\\BloodDonorship.Data.Models.csproj": {
-              "projectPath": "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Data\\BloodDonorship.Data.Models\\BloodDonorship.Data.Models.csproj"
+            "C:\\Users\\KAMEN\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Data\\BloodDonorship.Data.Models\\BloodDonorship.Data.Models.csproj": {
+              "projectPath": "C:\\Users\\KAMEN\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Data\\BloodDonorship.Data.Models\\BloodDonorship.Data.Models.csproj"
             },
-            "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Services\\BloodDonorship.Services.Mapping\\BloodDonorship.Services.Mapping.csproj": {
-              "projectPath": "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Services\\BloodDonorship.Services.Mapping\\BloodDonorship.Services.Mapping.csproj"
+            "C:\\Users\\KAMEN\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Services\\BloodDonorship.Services.Mapping\\BloodDonorship.Services.Mapping.csproj": {
+              "projectPath": "C:\\Users\\KAMEN\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Services\\BloodDonorship.Services.Mapping\\BloodDonorship.Services.Mapping.csproj"
             },
-            "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Web\\BloodDonorship.Web.ViewModels\\BloodDonorship.Web.ViewModels.csproj": {
-              "projectPath": "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Web\\BloodDonorship.Web.ViewModels\\BloodDonorship.Web.ViewModels.csproj"
+            "C:\\Users\\KAMEN\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Web\\BloodDonorship.Web.ViewModels\\BloodDonorship.Web.ViewModels.csproj": {
+              "projectPath": "C:\\Users\\KAMEN\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Web\\BloodDonorship.Web.ViewModels\\BloodDonorship.Web.ViewModels.csproj"
             }
           }
         }
@@ -7118,7 +7118,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -4,10 +4,16 @@
     int count = 1;
 }
 
+@if (this.TempData["InfoMessage"] != null)
+{
+    <div class="alert alert-success">@this.TempData["InfoMessage"]</div>
+}
+
 <div class="row">
     <div class="col-lg-6"><h3>@this.ViewData["Title"]</h3></div>
     <div class="col-lg-6">
         <a asp-area="Administration" asp-controller="Notifications" asp-action="AllToAdmin" class="btn btn-primary float-right">Notifications</a>
+        <a asp-area="Administration" asp-controller="Users" asp-action="AllDeleted" class="btn btn-outline-danger float-right">Deleted Users</a>
     </div>
     <div class="clearfix"></div>
 </div>
@@ -50,11 +56,13 @@
             <th scope="col">Blood Type</th>
             <th scope="col">Requests</th>
             <th scope="col">Donations</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var user in Model.Users)
         {
+            string confirmDelete = string.Concat("confirmDelete", user.Id);
             <tr>
                 <td>@count</td>
                 <td><time datetime="@user.CreatedOn.ToString("O")"></time></td>
@@ -62,6 +70,41 @@
                 <td>@(string.Concat(user.BloodBloodType, " ", user.BloodRhFactor))</td>
                 <td>@user.Requests.Count()</td>
                 <td>@user.Donations.Count()</td>
+                <td>
+                    
+                    <form asp-area="Administration" asp-controller="Users" asp-action="DeleteUser" asp-route-userId="@user.Id">
+                        @if (user.UserName != "Admin")
+                        {
+                            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#@confirmDelete" data-id="@user.Id">Delete</button>
+                        }
+
+                        <!-- The Modal -->
+                        <div class="modal" id="@confirmDelete">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title text-danger">Warning!</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        Are you sure you want to delete user: @user.UserName?
+                                        @user.Id
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                                        <input type="submit" class="btn btn-danger text-white" id="delete" value="Delete" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </td>
             </tr>
             count++;
         }

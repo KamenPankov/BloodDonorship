@@ -12,9 +12,9 @@ using System;
 using System.Reflection;
 
 [assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap4")]
-[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("BloodDonorship.Data", "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\B" +
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("BloodDonorship.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\B" +
     "loodDonorship\\Data\\BloodDonorship.Data", "BloodDonorship.Data.csproj", "0")]
-[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("BloodDonorship.Web", "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\B" +
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("BloodDonorship.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\B" +
     "loodDonorship\\Web\\BloodDonorship.Web", "BloodDonorship.Web.csproj", "0")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("BloodDonorship.Web.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]

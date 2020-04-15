@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Services\\BloodDonorship.Services.Messaging\\BloodDonorship.Services.Messaging.csproj": {}
+    "C:\\Users\\KAMEN\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Services\\BloodDonorship.Services.Messaging\\BloodDonorship.Services.Messaging.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Services\\BloodDonorship.Services.Messaging\\BloodDonorship.Services.Messaging.csproj": {
+    "C:\\Users\\KAMEN\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Services\\BloodDonorship.Services.Messaging\\BloodDonorship.Services.Messaging.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Services\\BloodDonorship.Services.Messaging\\BloodDonorship.Services.Messaging.csproj",
+        "projectUniqueName": "C:\\Users\\KAMEN\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Services\\BloodDonorship.Services.Messaging\\BloodDonorship.Services.Messaging.csproj",
         "projectName": "BloodDonorship.Services.Messaging",
-        "projectPath": "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Services\\BloodDonorship.Services.Messaging\\BloodDonorship.Services.Messaging.csproj",
-        "packagesPath": "C:\\Users\\Kamen\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Kamen\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Services\\BloodDonorship.Services.Messaging\\obj\\",
+        "projectPath": "C:\\Users\\KAMEN\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Services\\BloodDonorship.Services.Messaging\\BloodDonorship.Services.Messaging.csproj",
+        "packagesPath": "C:\\Users\\KAMEN\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\KAMEN\\Box\\Books\\Programming\\SoftUni\\C# Web ASP.Net Core\\BloodDonorship\\BloodDonorship\\Services\\BloodDonorship.Services.Messaging\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Kamen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\KAMEN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -68,7 +68,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

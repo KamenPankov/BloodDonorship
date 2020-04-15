@@ -83,6 +83,13 @@ namespace BloodDonorship.Web.Areas.Identity.Pages.Account
 
                 ApplicationUser user = await _userManager.FindByEmailAsync(Input.Email);
 
+                if (user == null)
+                {
+                    this.TempData["InfoMessage"] = "Something went wrong! Please contact us at:";
+
+                    return Page();
+                }
+
                 var result = await _signInManager.PasswordSignInAsync(user, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {

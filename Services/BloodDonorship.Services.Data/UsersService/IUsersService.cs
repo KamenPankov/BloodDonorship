@@ -13,6 +13,8 @@ namespace BloodDonorship.Services.Data.UsersService
 
         IEnumerable<T> GetAllUsers<T>();
 
+        IEnumerable<T> GetAllUsersDeleted<T>();
+
         string GetUserIdByEmail(string email);
 
         IEnumerable<EligibleUserViewModel> GetEligibleDonors(ApplicationUser user);
@@ -24,5 +26,9 @@ namespace BloodDonorship.Services.Data.UsersService
         string MostDonatedBloodType();
 
         int AvailableDonors();
+
+        Task DeleteUser(string userId);
+
+        Task UndeleteUser(string userId);
     }
 }

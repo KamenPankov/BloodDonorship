@@ -5,6 +5,13 @@
     ViewData["Title"] = "Log in";
 }
 
+@if (this.TempData["InfoMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @this.TempData["InfoMessage"] <a href="https://blooddonorship.azurewebsites.net/Contacts/Create">blooddonorship.azurewebsites.net</a>
+    </div>
+}
+
 <h1>@ViewData["Title"]</h1>
 <div class="row">
     <div class="col-md-4">

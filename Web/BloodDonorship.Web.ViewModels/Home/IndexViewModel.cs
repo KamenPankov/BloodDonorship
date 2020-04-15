@@ -1,9 +1,8 @@
-﻿using BloodDonorship.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-
+using BloodDonorship.Common;
 
 namespace BloodDonorship.Web.ViewModels.Home
 {
