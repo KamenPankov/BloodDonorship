@@ -63,6 +63,12 @@ namespace BloodDonorship.Web.Controllers
                 return this.RedirectToAction("Create", inputModel);
             }
 
+            ApplicationUser user = await this.userManager.FindByEmailAsync(inputModel.UserEmail);
+            if (user != null && user.IsDeleted)
+            {
+                return this.RedirectToAction("Create", inputModel);
+            }
+
             ApplicationUser userAdmin = this.userManager.GetUsersInRoleAsync("Administrator").Result.FirstOrDefault();
             string senderId = string.Empty;
 
