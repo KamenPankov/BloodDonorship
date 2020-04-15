@@ -6,3 +6,4 @@ C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\
 C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Services\BloodDonorship.Services\obj\Debug\netstandard2.0\BloodDonorship.Services.AssemblyInfo.cs
 C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Services\BloodDonorship.Services\obj\Debug\netstandard2.0\BloodDonorship.Services.dll
 C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Services\BloodDonorship.Services\obj\Debug\netstandard2.0\BloodDonorship.Services.pdb
+C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Services\BloodDonorship.Services\obj\Debug\netstandard2.0\BloodDonorship.Services.csproj.CoreCompileInputs.cache

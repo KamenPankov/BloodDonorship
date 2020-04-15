@@ -15,3 +15,4 @@ C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\
 C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web.ViewModels\obj\Debug\netstandard2.1\BloodDonorship.Web.ViewModels.csproj.CopyComplete
 C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web.ViewModels\obj\Debug\netstandard2.1\BloodDonorship.Web.ViewModels.dll
 C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web.ViewModels\obj\Debug\netstandard2.1\BloodDonorship.Web.ViewModels.pdb
+C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web.ViewModels\obj\Debug\netstandard2.1\BloodDonorship.Web.ViewModels.csproj.CoreCompileInputs.cache
