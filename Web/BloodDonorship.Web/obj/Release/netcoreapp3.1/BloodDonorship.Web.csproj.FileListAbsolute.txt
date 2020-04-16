@@ -163,7 +163,6 @@ C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\bin\Release\netcoreapp3.1\BloodDonorship.Common.pdb
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\bin\Release\netcoreapp3.1\BloodDonorship.Data.Common.pdb
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Release\netcoreapp3.1\BloodDonorship.Web.csprojAssemblyReference.cache
-C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Release\netcoreapp3.1\BloodDonorship.Web.csproj.CoreCompileInputs.cache
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Release\netcoreapp3.1\BloodDonorship.Web.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Release\netcoreapp3.1\BloodDonorship.Web.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Release\netcoreapp3.1\BloodDonorship.Web.RazorAssemblyInfo.cache
@@ -218,4 +217,4 @@ C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Release\netcoreapp3.1\staticwebassets\BloodDonorship.Web.StaticWebAssets.xml
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Release\netcoreapp3.1\BloodDonorship.Web.dll
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Release\netcoreapp3.1\BloodDonorship.Web.pdb
-C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Release\netcoreapp3.1\BloodDonorship.Web.genruntimeconfig.cache
+C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Release\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\ExternalLogin.cshtml.g.cs

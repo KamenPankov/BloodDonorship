@@ -2,7 +2,6 @@ C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Services\BloodDonorship.Services\bin\Release\netstandard2.0\BloodDonorship.Services.dll
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Services\BloodDonorship.Services\bin\Release\netstandard2.0\BloodDonorship.Services.pdb
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Services\BloodDonorship.Services\obj\Release\netstandard2.0\BloodDonorship.Services.csprojAssemblyReference.cache
-C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Services\BloodDonorship.Services\obj\Release\netstandard2.0\BloodDonorship.Services.csproj.CoreCompileInputs.cache
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Services\BloodDonorship.Services\obj\Release\netstandard2.0\BloodDonorship.Services.AssemblyInfoInputs.cache
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Services\BloodDonorship.Services\obj\Release\netstandard2.0\BloodDonorship.Services.AssemblyInfo.cs
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Services\BloodDonorship.Services\obj\Release\netstandard2.0\BloodDonorship.Services.dll

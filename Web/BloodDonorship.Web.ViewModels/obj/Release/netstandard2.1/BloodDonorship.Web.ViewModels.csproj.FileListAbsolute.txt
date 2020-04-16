@@ -10,7 +10,6 @@ C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web.ViewModels\bin\Release\netstandard2.1\BloodDonorship.Services.Mapping.pdb
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web.ViewModels\bin\Release\netstandard2.1\BloodDonorship.Data.Common.pdb
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web.ViewModels\obj\Release\netstandard2.1\BloodDonorship.Web.ViewModels.csprojAssemblyReference.cache
-C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web.ViewModels\obj\Release\netstandard2.1\BloodDonorship.Web.ViewModels.csproj.CoreCompileInputs.cache
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web.ViewModels\obj\Release\netstandard2.1\BloodDonorship.Web.ViewModels.AssemblyInfoInputs.cache
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web.ViewModels\obj\Release\netstandard2.1\BloodDonorship.Web.ViewModels.AssemblyInfo.cs
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web.ViewModels\obj\Release\netstandard2.1\BloodDonorship.Web.ViewModels.csproj.CopyComplete

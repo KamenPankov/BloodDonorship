@@ -328,7 +328,6 @@ C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\bin\Release\netcoreapp3.1\win-x86\hostfxr.dll
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\bin\Release\netcoreapp3.1\win-x86\hostpolicy.dll
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\bin\Release\netcoreapp3.1\win-x86\mscordaccore.dll
-C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\bin\Release\netcoreapp3.1\win-x86\mscordaccore_x86_x86_4.700.20.11803.dll
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\bin\Release\netcoreapp3.1\win-x86\mscordbi.dll
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\bin\Release\netcoreapp3.1\win-x86\mscorrc.debug.dll
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\bin\Release\netcoreapp3.1\win-x86\mscorrc.dll
@@ -485,7 +484,6 @@ C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\bin\Release\netcoreapp3.1\win-x86\BloodDonorship.Common.pdb
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\bin\Release\netcoreapp3.1\win-x86\BloodDonorship.Data.Common.pdb
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Release\netcoreapp3.1\win-x86\BloodDonorship.Web.csprojAssemblyReference.cache
-C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Release\netcoreapp3.1\win-x86\BloodDonorship.Web.csproj.CoreCompileInputs.cache
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Release\netcoreapp3.1\win-x86\BloodDonorship.Web.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Release\netcoreapp3.1\win-x86\BloodDonorship.Web.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Release\netcoreapp3.1\win-x86\BloodDonorship.Web.RazorAssemblyInfo.cache
@@ -540,4 +538,5 @@ C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Release\netcoreapp3.1\win-x86\staticwebassets\BloodDonorship.Web.StaticWebAssets.xml
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Release\netcoreapp3.1\win-x86\BloodDonorship.Web.dll
 C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Release\netcoreapp3.1\win-x86\BloodDonorship.Web.pdb
-C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Release\netcoreapp3.1\win-x86\BloodDonorship.Web.genruntimeconfig.cache
+C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\bin\Release\netcoreapp3.1\win-x86\mscordaccore_x86_x86_4.700.20.6602.dll
+C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Release\netcoreapp3.1\win-x86\Razor\Areas\Identity\Pages\Account\ExternalLogin.cshtml.g.cs

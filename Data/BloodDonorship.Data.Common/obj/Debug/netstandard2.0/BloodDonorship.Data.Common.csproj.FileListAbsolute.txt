@@ -6,4 +6,3 @@ C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\
 C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Data\BloodDonorship.Data.Common\obj\Debug\netstandard2.0\BloodDonorship.Data.Common.AssemblyInfo.cs
 C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Data\BloodDonorship.Data.Common\obj\Debug\netstandard2.0\BloodDonorship.Data.Common.dll
 C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Data\BloodDonorship.Data.Common\obj\Debug\netstandard2.0\BloodDonorship.Data.Common.pdb
-C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Data\BloodDonorship.Data.Common\obj\Debug\netstandard2.0\BloodDonorship.Data.Common.csproj.CoreCompileInputs.cache
