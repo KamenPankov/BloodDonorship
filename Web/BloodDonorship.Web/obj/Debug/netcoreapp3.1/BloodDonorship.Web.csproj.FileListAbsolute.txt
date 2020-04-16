@@ -217,5 +217,4 @@ C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\
 C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Debug\netcoreapp3.1\BloodDonorship.Web.dll
 C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Debug\netcoreapp3.1\BloodDonorship.Web.pdb
 C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Administration\Views\Users\AllDeleted.cshtml.g.cs
-C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Debug\netcoreapp3.1\BloodDonorship.Web.csproj.CoreCompileInputs.cache
-C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Debug\netcoreapp3.1\BloodDonorship.Web.genruntimeconfig.cache
+C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Web\BloodDonorship.Web\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\ExternalLogin.cshtml.g.cs

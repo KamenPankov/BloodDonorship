@@ -16,5 +16,3 @@ C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\
 C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Data\BloodDonorship.Data\obj\Debug\netcoreapp3.1\BloodDonorship.Data.csproj.CopyComplete
 C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Data\BloodDonorship.Data\obj\Debug\netcoreapp3.1\BloodDonorship.Data.dll
 C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Data\BloodDonorship.Data\obj\Debug\netcoreapp3.1\BloodDonorship.Data.pdb
-C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Data\BloodDonorship.Data\obj\Debug\netcoreapp3.1\BloodDonorship.Data.csproj.CoreCompileInputs.cache
-C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Data\BloodDonorship.Data\obj\Debug\netcoreapp3.1\BloodDonorship.Data.genruntimeconfig.cache

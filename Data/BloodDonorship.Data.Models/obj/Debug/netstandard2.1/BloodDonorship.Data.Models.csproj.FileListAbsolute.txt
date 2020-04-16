@@ -9,4 +9,3 @@ C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\
 C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Data\BloodDonorship.Data.Models\obj\Debug\netstandard2.1\BloodDonorship.Data.Models.csproj.CopyComplete
 C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Data\BloodDonorship.Data.Models\obj\Debug\netstandard2.1\BloodDonorship.Data.Models.dll
 C:\Users\KAMEN\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Data\BloodDonorship.Data.Models\obj\Debug\netstandard2.1\BloodDonorship.Data.Models.pdb
-C:\Users\Kamen\Box\Books\Programming\SoftUni\C# Web ASP.Net Core\BloodDonorship\BloodDonorship\Data\BloodDonorship.Data.Models\obj\Debug\netstandard2.1\BloodDonorship.Data.Models.csproj.CoreCompileInputs.cache
