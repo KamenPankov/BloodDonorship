@@ -56,7 +56,9 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> |
+            <a a asp-area="" asp-controller="Home" asp-action="LearnMore">Learn more</a> | 
+            <a id="showMap" onmouseover="showBloodCenters()" href="">Find nearby blood centers</a>
         </div>
     </footer>
 
@@ -79,6 +81,23 @@
 
     @this.RenderSection("Scripts", required: false)
 
-    
+    <script>
+        var x = document.getElementById("showMap");
+        function showBloodCenters() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            var coordinates = position.coords.latitude + "," + position.coords.longitude;
+            var url = "https://www.google.com/maps/search/blood+donation+center/@@" + coordinates + "z";
+
+            x.setAttribute("href", url);
+        }
+    </script>
+
 </body>
 </html>
