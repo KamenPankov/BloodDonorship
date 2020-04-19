@@ -64,6 +64,11 @@ namespace BloodDonorship.Web.Controllers
             return this.View();
         }
 
+        public IActionResult LearnMore()
+        {
+            return this.View();
+        }
+
         public IActionResult Privacy()
         {
             return this.View();

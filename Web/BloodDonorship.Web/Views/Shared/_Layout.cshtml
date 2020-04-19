@@ -32,8 +32,8 @@
                         </li>
                         <partial name="_LoggedInPartial" />
                         <!--<li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
-    </li>-->
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
+                        </li>-->
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Contacts" asp-action="Create">Contacts</a>
                         </li>
@@ -45,15 +45,15 @@
             </div>
         </nav>
     </header>
-    
+
     <div class="container">
-        <partial name="_NotSetBloodTypePartial"/>
+        <partial name="_NotSetBloodTypePartial" />
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @this.RenderBody()
         </main>
     </div>
-    
+
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
@@ -78,5 +78,7 @@
     </environment>
 
     @this.RenderSection("Scripts", required: false)
+
+    
 </body>
 </html>
