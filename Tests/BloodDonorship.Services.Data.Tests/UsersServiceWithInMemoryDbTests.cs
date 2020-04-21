@@ -401,6 +401,93 @@ namespace BloodDonorship.Services.Data.Tests
             Assert.Equal(3, deletedUsers.Count());
         }
 
+        [Fact]
+        public async Task GetAllUsersWithDeletedAndAnonymousTest()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                ApplicationUser user = new ApplicationUser()
+                {
+                    UserName = $"Usertest{i}",
+                    IsDeleted = true,
+                };
+
+                await this.usersRepository.AddAsync(user);
+            }
+
+            await this.usersRepository.SaveChangesAsync();
+
+            ApplicationUser userAnonymous = new ApplicationUser();
+            await this.usersRepository.AddAsync(userAnonymous);
+            await this.usersRepository.SaveChangesAsync();
+
+            AutoMapperConfig.RegisterMappings(typeof(UserTestModel).Assembly);
+
+            IEnumerable<UserTestModel> users = this.usersService.GetAllUsers<UserTestModel>();
+
+            Assert.Equal(this.GetTestUsers().Count(), users.Count());
+        }
+
+        [Fact]
+        public async Task GetAllUsersWithZeroCollectionTest()
+        {
+            List<ApplicationUser> users = this.usersRepository.All().ToList();
+
+            foreach (ApplicationUser user in users)
+            {
+                this.usersRepository.Delete(user);
+            }
+
+            await this.usersRepository.SaveChangesAsync();
+
+            AutoMapperConfig.RegisterMappings(typeof(UserTestModel).Assembly);
+
+            IEnumerable<UserTestModel> usersAll = this.usersService.GetAllUsers<UserTestModel>();
+
+            Assert.Empty(usersAll);
+        }
+
+        [Fact]
+        public async Task GetUserIdByEmailTest()
+        {
+            ApplicationUser testUser = new ApplicationUser()
+            {
+                Email = "testuser.email@gmail.com",
+            };
+
+            string testUserId = testUser.Id;
+
+            await this.usersRepository.AddAsync(testUser);
+            await this.usersRepository.SaveChangesAsync();
+
+            string resultUserId = this.usersService.GetUserIdByEmail("testuser.email@gmail.com");
+
+            Assert.Equal(testUserId, resultUserId);
+        }
+
+        [Fact]
+        public void GetUserIdByEmailReturnsNullTest()
+        {
+            string resultUserId = this.usersService.GetUserIdByEmail("testuser.email@gmail.com");
+
+            Assert.True(string.IsNullOrEmpty(resultUserId));
+        }
+
+        [Fact]
+        public async Task AddAnonymousUserTest()
+        {
+            ApplicationUser anonymousUser = new ApplicationUser()
+            {
+                Email = "anonymous@gmail.com",
+            };
+
+            string anonymousUserId = await this.usersService.AddAnonymousUser("anonymous@gmail.com");
+
+            string getAnonymousUserId = this.usersService.GetUserIdByEmail("anonymous@gmail.com");
+
+            Assert.Equal(anonymousUserId, getAnonymousUserId);
+        }
+
         public class UserTestModel : IMapFrom<ApplicationUser>
         {
         }
