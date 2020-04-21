@@ -75,6 +75,10 @@ namespace BloodDonorship.Services.Data.UsersService
             return this.entityRepository.All()
                 .Where(u => u.Blood != null && u.Blood.BloodType != 0 && u.Blood.RhFactor != 0)
                 .OrderByDescending(u => u.Requests.Count())
+                .ThenByDescending(u => u.Requests
+                                    .Select(r => r.CreatedOn)
+                                    .OrderByDescending(r => r)
+                                    .FirstOrDefault())
                 .Select(u => string.Concat(u.Blood.BloodType.ToString(), " ", u.Blood.RhFactor.ToString()))
                 .FirstOrDefault();
         }
@@ -84,6 +88,10 @@ namespace BloodDonorship.Services.Data.UsersService
             return this.entityRepository.All()
                 .Where(u => u.Blood != null && u.Blood.BloodType != 0 && u.Blood.RhFactor != 0)
                 .OrderByDescending(u => u.Donations.Count())
+                .ThenByDescending(u => u.Donations
+                                    .Select(d => d.CreatedOn)
+                                    .OrderByDescending(d => d)
+                                    .FirstOrDefault())
                 .Select(u => string.Concat(u.Blood.BloodType.ToString(), " ", u.Blood.RhFactor.ToString()))
                 .FirstOrDefault();
         }
@@ -94,8 +102,11 @@ namespace BloodDonorship.Services.Data.UsersService
                 .Where(u => u.Id == userId)
                 .FirstOrDefault();
 
-            this.entityRepository.Delete(user);
-            await this.entityRepository.SaveChangesAsync();
+            if (user != null)
+            {
+                this.entityRepository.Delete(user);
+                await this.entityRepository.SaveChangesAsync();
+            }
         }
 
         public async Task UndeleteUser(string userId)
@@ -104,8 +115,11 @@ namespace BloodDonorship.Services.Data.UsersService
                 .Where(u => u.Id == userId)
                 .FirstOrDefault();
 
+            if (user != null)
+            {
             this.entityRepository.Undelete(user);
             await this.entityRepository.SaveChangesAsync();
+            }
         }
 
         public IEnumerable<EligibleUserViewModel> GetEligibleDonors(ApplicationUser user)
