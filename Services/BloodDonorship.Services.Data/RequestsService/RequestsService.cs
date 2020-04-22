@@ -52,15 +52,15 @@ namespace BloodDonorship.Services.Data.RequestsService
             return query.To<T>().ToArray();
         }
 
-        public IEnumerable<T> AllByEmail<T>(string email, int? count = null)
+        public IEnumerable<T> AllByUserName<T>(string username, int? count = null)
         {
-            if (string.IsNullOrEmpty(email))
+            if (string.IsNullOrEmpty(username))
             {
                 return this.All<T>(1);
             }
 
             IQueryable<Request> query = this.requestsRepository.All()
-                .Where(r => r.User.Email.Contains(email) && r.User.IsDeleted == false)
+                .Where(r => r.User.UserName.ToLower().Contains(username.ToLower()) && r.User.IsDeleted == false)
                 .OrderByDescending(r => r.CreatedOn);
 
             if (count.HasValue)

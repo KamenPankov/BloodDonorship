@@ -29,7 +29,7 @@ namespace BloodDonorship.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(int? currentPage, string email = null)
+        public IActionResult Index(int? currentPage, string username = null)
         {
             if (this.signInManager.IsSignedIn(this.User))
             {
@@ -49,13 +49,13 @@ namespace BloodDonorship.Web.Controllers
 
                 IndexViewModel viewModel = new IndexViewModel(requestsCount, currentPage.Value)
                 {
-                    PageTitle = string.IsNullOrEmpty(email) ?
+                    PageTitle = string.IsNullOrEmpty(username) ?
                                     "All Requests" :
-                                    $"Results for: {email}",
-                    AllRequests = string.IsNullOrEmpty(email) ?
+                                    $"Results for: {username}",
+                    AllRequests = string.IsNullOrEmpty(username) ?
                                     this.requestsService.All<AllRequestViewModel>
                                         (currentPage.Value, GlobalConstants.RequestsPerPage) :
-                                    this.requestsService.AllByEmail<AllRequestViewModel>(email),
+                                    this.requestsService.AllByUserName<AllRequestViewModel>(username),
                 };
 
                 return this.View(viewModel);

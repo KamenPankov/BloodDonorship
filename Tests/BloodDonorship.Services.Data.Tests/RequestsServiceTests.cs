@@ -46,6 +46,7 @@ namespace BloodDonorship.Services.Data.Tests
         public IEnumerable<Request> GetTestRequests()
         {
             List<Request> requests = new List<Request>();
+            string[] userNameSuffix = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n" };
 
             for (int i = 0; i < 10; i++)
             {
@@ -54,6 +55,7 @@ namespace BloodDonorship.Services.Data.Tests
                     User = new ApplicationUser()
                     {
                         Email = $"test_email{i}@gmail.com",
+                        UserName = $"User{userNameSuffix[i]}",
                     },
                 };
 
@@ -85,53 +87,54 @@ namespace BloodDonorship.Services.Data.Tests
         }
 
         [Theory]
-        [InlineData("test_email1@gmail.com")]
-        [InlineData("test_email5@gmail.com")]
-        [InlineData("test_email8@gmail.com")]
-        public void RequestsAllByEmailReturnRightFullEmailTest(string email)
+        [InlineData("Usera")]
+        [InlineData("Userc")]
+        [InlineData("Userg")]
+        public void RequestsAllByUserNameReturnRightFullUserNameTest(string username)
         {
             AutoMapperConfig.RegisterMappings(typeof(RequestTestModel).Assembly);
 
-            IEnumerable<RequestTestModel> requestsAllByEmail = this.requestsService.AllByEmail<RequestTestModel>(email);
+            IEnumerable<RequestTestModel> requestsAllByUserName = this.requestsService.AllByUserName<RequestTestModel>(username);
 
-            Assert.Single(requestsAllByEmail);
+            Assert.Single(requestsAllByUserName);
         }
 
         [Theory]
-        [InlineData("te")]
-        [InlineData("test_em")]
-        [InlineData("gmail.com")]
-        public void RequestsAllByEmailReturnRightPartOfEmailTest(string email)
+        [InlineData("Us")]
+        [InlineData("uSeR")]
+        [InlineData("eR")]
+        [InlineData("sEr")]
+        public void RequestsAllByUserNameReturnRightPartOfUserNameTest(string username)
         {
             AutoMapperConfig.RegisterMappings(typeof(RequestTestModel).Assembly);
 
-            IEnumerable<RequestTestModel> requestsAllByEmail = this.requestsService.AllByEmail<RequestTestModel>(email);
+            IEnumerable<RequestTestModel> requestsAllByUserName = this.requestsService.AllByUserName<RequestTestModel>(username);
 
-            Assert.Equal(10, requestsAllByEmail.Count());
+            Assert.Equal(10, requestsAllByUserName.Count());
         }
 
         [Theory]
-        [InlineData("someone@gmail.com")]
+        [InlineData("someUser")]
         [InlineData("someone")]
-        public void RequestsAllByEmailReturnEmptyCollectionTest(string email)
+        public void RequestsAllByUserNameReturnEmptyCollectionTest(string username)
         {
             AutoMapperConfig.RegisterMappings(typeof(RequestTestModel).Assembly);
 
-            IEnumerable<RequestTestModel> requestsAllByEmail = this.requestsService.AllByEmail<RequestTestModel>(email);
+            IEnumerable<RequestTestModel> requestsAllByUserName = this.requestsService.AllByUserName<RequestTestModel>(username);
 
-            Assert.True(!requestsAllByEmail.Any());
+            Assert.True(!requestsAllByUserName.Any());
         }
 
         [Theory]
         [InlineData(null)]
         [InlineData("")]
-        public void RequestsAllByEmailReturnAllEmptyEmailTest(string email)
+        public void RequestsAllByUserNameReturnAllEmptyInputTest(string username)
         {
             AutoMapperConfig.RegisterMappings(typeof(RequestTestModel).Assembly);
 
-            IEnumerable<RequestTestModel> requestsAllByEmail = this.requestsService.AllByEmail<RequestTestModel>(email);
+            IEnumerable<RequestTestModel> requestsAllByUserName = this.requestsService.AllByUserName<RequestTestModel>(username);
 
-            Assert.Equal(GlobalConstants.RequestsPerPage, requestsAllByEmail.Count());
+            Assert.Equal(GlobalConstants.RequestsPerPage, requestsAllByUserName.Count());
         }
 
         [Fact]

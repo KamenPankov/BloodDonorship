@@ -11,7 +11,7 @@ namespace BloodDonorship.Services.Data.RequestsService
 
         IEnumerable<T> AllByUser<T>(string userId, int? count = null);
 
-        IEnumerable<T> AllByEmail<T>(string email, int? count = null);
+        IEnumerable<T> AllByUserName<T>(string emausernameil, int? count = null);
 
         Task<string> AddAsync(string userId, int notifiedUsersCount);
 

@@ -22,20 +22,23 @@ namespace BloodDonorship.Services.Data.DonationsService
 
         public async Task AddAsync(CreateDonationViewModel viewModel)
         {
-            using (MemoryStream memorySream = new MemoryStream())
+            if (viewModel.FormFile != null)
             {
-                await viewModel.FormFile.CopyToAsync(memorySream);
-
-                Donation donation = new Donation()
+                using (MemoryStream memorySream = new MemoryStream())
                 {
-                    RequestId = viewModel.RequestId,
-                    UserId = viewModel.UserId,
-                    ImageTitle = viewModel.FileName,
-                    ImageData = memorySream.ToArray(),
-                };
+                    await viewModel.FormFile.CopyToAsync(memorySream);
 
-                await this.entityRepository.AddAsync(donation);
-                await this.entityRepository.SaveChangesAsync();
+                    Donation donation = new Donation()
+                    {
+                        RequestId = viewModel.RequestId,
+                        UserId = viewModel.UserId,
+                        ImageTitle = viewModel.FileName,
+                        ImageData = memorySream.ToArray(),
+                    };
+
+                    await this.entityRepository.AddAsync(donation);
+                    await this.entityRepository.SaveChangesAsync();
+                }
             }
         }
 
